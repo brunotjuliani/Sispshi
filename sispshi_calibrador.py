@@ -6,24 +6,25 @@ import sispshi_gr5i as gr5i
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
 import matplotlib.pyplot as plt
+import HydroErr as he
 
-n_bacia = 1
-nome = 'Rio_Negro'
+n_bacia = 5
+nome = 'Santa_Cruz_Timbo'
 
-# FORCANTES
+_# FORCANTES
 area = float(pd.read_csv(f'sispshi_{n_bacia:02d}_{nome}_peq.csv', nrows=0).columns[0])
 #area = float(pd.read_csv(f'../Dados/PEQ/{n_bacia:02d}_{nome}_peq.csv', nrows=0).columns[0])
 dt = 0.25
 PEQ = pd.read_csv(f'sispshi_{n_bacia:02d}_{nome}_peq.csv', skiprows=1, index_col='datahora', parse_dates=True)
 #PEQ = pd.read_csv(f'../Dados/PEQ/{n_bacia:02d}_{nome}_peq.csv', skiprows=1, index_col='datahora', parse_dates=True)
 idx = PEQ.index
-PME  = PEQ['siprec']
+PME  = PEQ['pme']
 ETP  = PEQ['etp']
 Qjus = PEQ['qjus']
 Qmon = PEQ['qmon']
 
 #periodo de validação
-t1_cal = pd.Timestamp('2020-01-01', tz='UTC')
+t1_cal = pd.Timestamp('2018', tz='UTC')
 idx_cal = idx[idx >= t1_cal]
 
 # CALIBRACAO 01 - LOG - Lower Zone
@@ -40,7 +41,7 @@ DF_params_1.to_csv('sispshi_params1.csv')
 bestindex_1, bestobjf_1 = get_minlikeindex(results_1)
 simulation_fields_1 = get_simulation_fields(results_1)
 Qsim_1 = list(results_1[simulation_fields_1][bestindex_1])
-
+Qsim_1
 
 # CALIBRACAO 02 - DRMS - Upper Zone
 spot_setup_2 = sacsma2021.spotpy_2(area, dt, PME, ETP, Qjus, idx, idx_cal, Qmon=Qmon, fobj='DRMS')
@@ -115,3 +116,29 @@ fig.update_yaxes(title_text='Vazão [m3s-1]', row=2, col=1)
 fig.update_layout(legend_title_text='Comparação Modelo Sacramento')
 fig.update_layout(autosize=False,width=800,height=450,margin=dict(l=30,r=30,b=10,t=10))
 fig.show()
+
+#AVALIAÇÃO
+simul = pd.DataFrame(data=[Qsim_1, Qsim_3, Qsim_4, Qsim_gr]).T
+simul.index = idx
+simul.columns = ['Qsim_1', 'Qsim_3', 'Qsim_4', 'Qsim_gr']
+
+##CORTE DE TEMPO PARA NASH E PLOTAGEM##
+df = pd.merge(PEQ['qjus'], simul, how = 'outer',
+              left_index = True, right_index = True)
+df = pd.merge(df, PEQ['pme'], how = 'outer',
+              left_index = True, right_index = True)
+df2 = df.loc['2019':'2020']
+#print('Período: 01/2014 - 06/2014')
+df2
+
+nash_log = he.nse(df2['qjus'],df2['Qsim_1'])
+print('Nash Sac LOG = ' + str(nash_log))
+
+nash_macs = he.nse(df2['qjus'],df2['Qsim_3'])
+print('Nash Sac MACS = ' + str(nash_macs))
+
+nash_nse = he.nse(df2['qjus'],df2['Qsim_4'])
+print('Nash Sac NSE = ' + str(nash_nse))
+
+nash_gr_nse = he.nse(df2['qjus'],df2['Qsim_gr'])
+print('Nash GR5i NSE = ' + str(nash_gr_nse))
