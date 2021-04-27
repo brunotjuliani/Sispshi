@@ -8,8 +8,8 @@ import plotly.graph_objects as go
 import matplotlib.pyplot as plt
 import HydroErr as he
 
-n_bacia = 5
-nome = 'Santa_Cruz_Timbo'
+n_bacia = 1
+nome = 'Rio_Negro'
 
 # FORCANTES
 area = float(pd.read_csv(f'sispshi_{n_bacia:02d}_{nome}_peq.csv', nrows=0).columns[0])
@@ -65,7 +65,7 @@ df = pd.merge(PEQ['qjus'], simul, how = 'outer',
               left_index = True, right_index = True)
 df = pd.merge(df, PEQ['pme'], how = 'outer',
               left_index = True, right_index = True)
-df2 = df.loc['2019':'2020']
+df2 = df.loc['2016':'2020']
 #print('Período: 01/2014 - 06/2014')
 
 
