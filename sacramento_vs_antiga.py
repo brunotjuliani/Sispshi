@@ -5,12 +5,13 @@ import HydroErr as he
 
 #Numero da bacia e leitura das forçantes
 bn = 1
-arq = open(f'../dados/peq/bacia_{bn:02d}.peq')
+bnome = 'Rio_Negro'
+arq = open(f'./PEQ_hr/{bn:02d}_{bnome}_peq_hr.csv')
 areainc = float(arq.readline())
-df = pd.read_csv('../dados/peq/bacia_01.peq', skiprows=[0],
-                 index_col = 'datahora_UTC', parse_dates = True)
+df = pd.read_csv(f'./PEQ_hr/{bn:02d}_{bnome}_peq_hr.csv', skiprows=[0],
+                 index_col = 'datahora', parse_dates = True)
+
 #df = df.loc['2014']
-df['qmon'] = 0
 cmb = df['pme']
 etp = df['etp']
 qmont = df['qmon']
@@ -607,12 +608,8 @@ Qbaixa = ExecutaSACSIMPLES(parametros[2], datas, etp, cmb, qmont, areainc,
 # Vazão modelada com ponderação pela classe da vazão
 Qmod = Fracionamento(datas, qobs, Qalta, Qmedia, Qbaixa)
 del Qalta, Qmedia, Qbaixa, estados
-df['qsim'] = pd.DataFrame.from_dict(Qmod, orient = 'index')
-Qsimulado = df[['qsim']]
+df['qsim_antigo'] = pd.DataFrame.from_dict(Qmod, orient = 'index')
+Qsimulado = df[['qsim_antigo']]
 
-
-df2 = df.loc['2014-06':'2014-07']
-Qsimulado2 = df2[['qsim']]
-
-nash = he.nse(df2['qsim'],df2['qjus'])
-print('nash = ' + str(nash))
+Qsimulado.to_csv(f'./Simul_Antigo/{bn:02d}_{bnome}_sim_ant.csv',
+                 date_format='%Y-%m-%dT%H:%M:%SZ', float_format = '%.3f')
