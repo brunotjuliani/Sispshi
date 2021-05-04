@@ -69,8 +69,8 @@ def sim(X):
 
 
 ### LEITURA FORÇANTES
-bn = 1
-bnome = 'Rio_Negro'
+bn = 3
+bnome = 'Sao_Bento'
 area = pd.read_csv(f'../PEQ/{bn:02d}_{bnome}_peq.csv', nrows=1, header=None).values[0][0]
 dt = 0.25 # 6 hr
 PEQ = pd.read_csv(f'../PEQ/{bn:02d}_{bnome}_peq.csv', skiprows=1,
@@ -142,11 +142,11 @@ fig.update_layout(legend_title_text='Comparação Modelo Sacramento')
 fig.update_layout(autosize=False,width=800,height=450,margin=dict(l=30,r=30,b=10,t=10))
 fig.show()
 
-# df_params = pd.DataFrame()
-# df_params['Parametros'] = Xnomes
-# df_params['Par_LOG'] = np.append(X1,[None, None, None])
-# df_params['Par_DRMS'] = np.append(X2,[None, None, None])
-# df_params['Par_MACS'] = np.append(X3,[None, None, None])
-# df_params['Par_NSE'] = np.append(X4,[None, None, None])
-#
-# df_params.to_csv(f'./param_macs/param_macs_{bn:02d}_{bnome}.csv', index=False)
+df_params = pd.DataFrame()
+df_params['Parametros'] = Xnomes
+df_params['Par_LOG'] = np.append(X1,[None, None, None])
+df_params['Par_DRMS'] = np.append(X2,[None, None, None])
+df_params['Par_MACS'] = np.append(X3,[None, None, None])
+df_params['Par_NSE'] = np.append(X4,[None, None, None])
+
+df_params.to_csv(f'./param_macs/param_macs_{bn:02d}_{bnome}.csv', index=False)

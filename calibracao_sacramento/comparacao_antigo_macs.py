@@ -14,8 +14,8 @@ def sim(X):
     return Qsim
 
 ### LEITURA FORÇANTES
-bn = 1
-bnome = 'Rio_Negro'
+bn = 2
+bnome = 'Porto_Amazonas'
 area = pd.read_csv(f'../PEQ/{bn:02d}_{bnome}_peq.csv', nrows=1, header=None).values[0][0]
 dt = 0.25 # 6 hr
 PEQ = pd.read_csv(f'../PEQ/{bn:02d}_{bnome}_peq.csv', skiprows=1,

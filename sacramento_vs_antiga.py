@@ -4,8 +4,8 @@ import sys
 import HydroErr as he
 
 #Numero da bacia e leitura das forçantes
-bn = 1
-bnome = 'Rio_Negro'
+bn = 3
+bnome = 'Sao_Bento'
 arq = open(f'./PEQ_hr/{bn:02d}_{bnome}_peq_hr.csv')
 areainc = float(arq.readline())
 df = pd.read_csv(f'./PEQ_hr/{bn:02d}_{bnome}_peq_hr.csv', skiprows=[0],
