@@ -1,0 +1,4524 @@
+
+ ~/SISPSHI2/1-datahora.py
+     - 2021-05-13 19:00:00 <- Datahora de referência.
+     - 2021-05-08 19:00:00 <- Datahora do início do período de consulta ao banco.
+     - 2021-05-20 19:00:00 <- Datahora do final do período de previsão
+     - 2020-04-08 19:00:00 <- Datahora limite para início de séries de dados e presença de arquivos antigos
+
+Somente tuplas está habilitado.
+psql:script_consulta.sql:3: valor "null" desconhecido para "footer"; definindo "on"
+Rodapé padrão está habilitado.
+
+ ~/SISPSHI2/Dados_Estacoes/1-consulta_dados.py
+     - Período da consulta: 2021-05-08 19:00:00 a 2021-05-13 19:00:00
+     - 52 pluviômetros e 18 postos fluviométricos
+     - Gerado script PostGreSQL: script_consulta.sql
+
+----- POSTGRESQL -----
+----- POSTGRESQL -----
+
+
+ ~/SISPSHI2/Dados_Estacoes/2-series_horarias.py
+
+     - Armazenou dados do arquivo de séries brutas de chuva; 22378 linhas.
+     - Encontrados 5 pluviômetros sem dados:  25315301 (Salto Osório),  25325330 (Salto Caxias Hid.),  25345331 (Nova Prata do Iguaçu),  25415426 (Salto Cataratas),  25245437 (Foz do Iguaçu), 
+     - Verificando chuva em Vossoroca (25494905):
+          > Dados disponíveis (pré-aval) = 484 dados, 100.00% da série.
+          > Processou TESTE 1 , 2 , 3 , 4
+          > Dados disponíveis = 484 dados, 100.00% da série.
+          > Regravou arquivos com séries de chuva.
+     - Verificando chuva em Pinhais (25254905):
+          > Dados disponíveis (pré-aval) = 484 dados, 100.00% da série.
+          > Processou TESTE 1 , 2 , 3 , 4
+          > Dados disponíveis = 484 dados, 100.00% da série.
+          > Regravou arquivos com séries de chuva.
+     - Verificando chuva em Curitiba (25264916):
+          > Dados disponíveis (pré-aval) = 484 dados, 100.00% da série.
+          > Processou TESTE 1 , 2 , 3 , 4
+          > Dados disponíveis = 484 dados, 100.00% da série.
+          > Regravou arquivos com séries de chuva.
+     - Verificando chuva em Fragosos (26094923):
+          > Dados disponíveis (pré-aval) = 484 dados, 100.00% da série.
+          > Processou TESTE 1 , 2 , 3 , 4
+          > Dados disponíveis = 484 dados, 100.00% da série.
+          > Regravou arquivos com séries de chuva.
+     - Verificando chuva em Lapa (25474946):
+          > Dados disponíveis (pré-aval) = 479 dados,  98.97% da série.
+          > Processou TESTE 1 , 2 , 3 , 4
+          > Dados disponíveis = 479 dados,  98.97% da série.
+          > Regravou arquivos com séries de chuva.
+     - Verificando chuva em São Bento (25564947):
+          > Dados disponíveis (pré-aval) = 484 dados, 100.00% da série.
+          > Processou TESTE 1 , 2 , 3 , 4
+          > Dados disponíveis = 484 dados, 100.00% da série.
+          > Regravou arquivos com séries de chuva.
+     - Verificando chuva em Rio Negro (26064948):
+          > Dados disponíveis (pré-aval) = 484 dados, 100.00% da série.
+          > Processou TESTE 1 , 2 , 3 , 4
+          > Dados disponíveis = 484 dados, 100.00% da série.
+          > Regravou arquivos com séries de chuva.
+     - Verificando chuva em Porto Amazonas (25334953):
+          > Dados disponíveis (pré-aval) = 484 dados, 100.00% da série.
+          > Processou TESTE 1 , 2 , 3 , 4
+          > Dados disponíveis = 484 dados, 100.00% da série.
+          > Regravou arquivos com séries de chuva.
+     - Verificando chuva em Ponta Grossa (25135001):
+          > Dados disponíveis (pré-aval) = 484 dados, 100.00% da série.
+          > Processou TESTE 1 , 2 , 3 , 4
+          > Dados disponíveis = 484 dados, 100.00% da série.
+          > Regravou arquivos com séries de chuva.
+     - Verificando chuva em Divisa (26055019):
+          > Dados disponíveis (pré-aval) = 484 dados, 100.00% da série.
+          > Processou TESTE 1 , 2 , 3 , 4
+          > Dados disponíveis = 484 dados, 100.00% da série.
+          > Regravou arquivos com séries de chuva.
+     - Verificando chuva em São Mateus do Sul (25525023):
+          > Dados disponíveis (pré-aval) = 482 dados,  99.59% da série.
+          > Processou TESTE 1 , 2 , 3 , 4
+          > Dados disponíveis = 482 dados,  99.59% da série.
+          > Regravou arquivos com séries de chuva.
+     - Verificando chuva em Pontilhão (25555031):
+          > Dados disponíveis (pré-aval) = 484 dados, 100.00% da série.
+          > Processou TESTE 1 , 2 , 3 , 4
+          > Dados disponíveis = 484 dados, 100.00% da série.
+          > Regravou arquivos com séries de chuva.
+     - Verificando chuva em Fluviópolis (26025035):
+          > Dados disponíveis (pré-aval) = 484 dados, 100.00% da série.
+          > Processou TESTE 1 , 2 , 3 , 4
+          > Dados disponíveis = 484 dados, 100.00% da série.
+          > Regravou arquivos com séries de chuva.
+     - Verificando chuva em Fernandes Pinheiro (25275035):
+          > Dados disponíveis (pré-aval) = 484 dados, 100.00% da série.
+          > Processou TESTE 1 , 2 , 3 , 4
+          > Dados disponíveis = 484 dados, 100.00% da série.
+          > Regravou arquivos com séries de chuva.
+     - Verificando chuva em Foz do Cachoeira (26355045):
+          > Dados disponíveis (pré-aval) = 484 dados, 100.00% da série.
+          > Processou TESTE 1 , 2 , 3 , 4
+          > Dados disponíveis = 484 dados, 100.00% da série.
+          > Regravou arquivos com séries de chuva.
+     - Verificando chuva em Foz do Timbó (26105047):
+          > Dados disponíveis (pré-aval) = 484 dados, 100.00% da série.
+          > Processou TESTE 1 , 2 , 3 , 4
+          > Dados disponíveis = 484 dados, 100.00% da série.
+          > Regravou arquivos com séries de chuva.
+     - Verificando chuva em Santa Cruz do Timbó (26125049):
+          > Dados disponíveis (pré-aval) = 484 dados, 100.00% da série.
+          > Processou TESTE 1 , 2 , 3 , 4
+          > Dados disponíveis = 484 dados, 100.00% da série.
+          > Regravou arquivos com séries de chuva.
+     - Verificando chuva em União da Vitória Hid. (26145104):
+          > Dados disponíveis (pré-aval) = 484 dados, 100.00% da série.
+          > Processou TESTE 1 , 2 , 3 , 4
+          > Dados disponíveis = 484 dados, 100.00% da série.
+          > Regravou arquivos com séries de chuva.
+     - Verificando chuva em União da Vitória Met. (26145103):
+          > Dados disponíveis (pré-aval) = 484 dados, 100.00% da série.
+          > Processou TESTE 1 , 2 , 3 , 4
+          > Dados disponíveis = 484 dados, 100.00% da série.
+          > Regravou arquivos com séries de chuva.
+     - Verificando chuva em Palmital do Meio (26025109):
+          > Dados disponíveis (pré-aval) = 484 dados, 100.00% da série.
+          > Processou TESTE 1 , 2 , 3 , 4
+          > Dados disponíveis = 484 dados, 100.00% da série.
+          > Regravou arquivos com séries de chuva.
+     - Verificando chuva em Porto Vitória (26105114):
+          > Dados disponíveis (pré-aval) = 484 dados, 100.00% da série.
+          > Processou TESTE 1 , 2 , 3 , 4
+          > Dados disponíveis = 484 dados, 100.00% da série.
+          > Regravou arquivos com séries de chuva.
+     - Verificando chuva em Jangada (26225115):
+          > Dados disponíveis (pré-aval) = 484 dados, 100.00% da série.
+          > Processou TESTE 1 , 2 , 3 , 4
+          > Dados disponíveis = 484 dados, 100.00% da série.
+          > Regravou arquivos com séries de chuva.
+     - Verificando chuva em Madeireira Gavazzoni (25485116):
+          > Dados disponíveis (pré-aval) = 484 dados, 100.00% da série.
+          > Processou TESTE 1 , 2 , 3 , 4
+          > Dados disponíveis = 484 dados, 100.00% da série.
+          > Regravou arquivos com séries de chuva.
+     - Verificando chuva em Entre Rios (25335129):
+          > Dados disponíveis (pré-aval) = 484 dados, 100.00% da série.
+          > Processou TESTE 1 , 2 , 3 , 4
+          > Dados disponíveis = 484 dados, 100.00% da série.
+          > Regravou arquivos com séries de chuva.
+     - Verificando chuva em Guarapuava (25215130):
+          > Dados disponíveis (pré-aval) = 484 dados, 100.00% da série.
+          > Processou TESTE 1 , 2 , 3 , 4
+          > Dados disponíveis = 484 dados, 100.00% da série.
+          > Regravou arquivos com séries de chuva.
+     - Verificando chuva em Foz do Areia Hid. (26005139):
+          > Dados disponíveis (pré-aval) = 482 dados,  99.59% da série.
+          > Processou TESTE 1 , 2 , 3 , 4
+          > Dados disponíveis = 483 dados,  99.79% da série.
+          > Regravou arquivos com séries de chuva.
+     - Verificando chuva em Foz do Areia Met. (26055139):
+          > Dados disponíveis (pré-aval) = 125 dados,  25.83% da série.
+          > Processou TESTE 1 , 2 , 3 , 4
+          > Dados disponíveis = 125 dados,  25.83% da série.
+          > Regravou arquivos com séries de chuva.
+     - Verificando chuva em Solais Novo (26055155):
+          > Dados disponíveis (pré-aval) = 482 dados,  99.59% da série.
+          > Processou TESTE 1 , 2 , 3 , 4
+          > Dados disponíveis = 482 dados,  99.59% da série.
+          > Regravou arquivos com séries de chuva.
+     - Verificando chuva em Pinhão (25385157):
+          > Dados disponíveis (pré-aval) = 484 dados, 100.00% da série.
+          > Processou TESTE 1 , 2 , 3 , 4
+          > Dados disponíveis = 484 dados, 100.00% da série.
+          > Regravou arquivos com séries de chuva.
+     - Verificando chuva em Palmas (26285158):
+          > Dados disponíveis (pré-aval) = 484 dados, 100.00% da série.
+          > Processou TESTE 1 , 2 , 3 , 4
+          > Dados disponíveis = 484 dados, 100.00% da série.
+          > Regravou arquivos com séries de chuva.
+     - Verificando chuva em Segredo (25475206):
+          > Dados disponíveis (pré-aval) = 484 dados, 100.00% da série.
+          > Processou TESTE 1 , 2 , 3 , 4
+          > Dados disponíveis = 484 dados, 100.00% da série.
+          > Regravou arquivos com séries de chuva.
+     - Verificando chuva em Porto Palmeirinha (26015237):
+          > Dados disponíveis (pré-aval) = 484 dados, 100.00% da série.
+          > Processou TESTE 1 , 2 , 3 , 4
+          > Dados disponíveis = 484 dados, 100.00% da série.
+          > Regravou arquivos com séries de chuva.
+     - Verificando chuva em Pato Branco (26075241):
+          > Dados disponíveis (pré-aval) = 484 dados, 100.00% da série.
+          > Processou TESTE 1 , 2 , 3 , 4
+          > Dados disponíveis = 484 dados, 100.00% da série.
+          > Regravou arquivos com séries de chuva.
+     - Verificando chuva em Águas do Verê (25465256):
+          > Dados disponíveis (pré-aval) = 484 dados, 100.00% da série.
+          > Processou TESTE 1 , 2 , 3 , 4
+          > Dados disponíveis = 484 dados, 100.00% da série.
+          > Regravou arquivos com séries de chuva.
+     - Verificando chuva em Porto Santo Antônio (25235306):
+          > Dados disponíveis (pré-aval) = 483 dados,  99.79% da série.
+          > Processou TESTE 1 , 2 , 3 , 4
+          > Dados disponíveis = 483 dados,  99.79% da série.
+          > Regravou arquivos com séries de chuva.
+     - Verificando chuva em Foz do Chopim (25345306):
+          > Dados disponíveis (pré-aval) = 484 dados, 100.00% da série.
+          > Processou TESTE 1 , 2 , 3 , 4
+          > Dados disponíveis = 484 dados, 100.00% da série.
+          > Regravou arquivos com séries de chuva.
+     - Verificando chuva em Balsa Jaracatiá (25345816):
+          > Dados disponíveis (pré-aval) = 484 dados, 100.00% da série.
+          > Processou TESTE 1 , 2 , 3 , 4
+          > Dados disponíveis = 484 dados, 100.00% da série.
+          > Regravou arquivos com séries de chuva.
+     - Verificando chuva em Salto Caxias Met. (25315329):
+          > Dados disponíveis (pré-aval) = 484 dados, 100.00% da série.
+          > Processou TESTE 1 , 2 , 3 , 4
+          > Dados disponíveis = 484 dados, 100.00% da série.
+          > Regravou arquivos com séries de chuva.
+     - Verificando chuva em Cascavel (24535333):
+          > Dados disponíveis (pré-aval) = 484 dados, 100.00% da série.
+          > Processou TESTE 1 , 2 , 3 , 4
+          > Dados disponíveis = 484 dados, 100.00% da série.
+          > Regravou arquivos com séries de chuva.
+     - Verificando chuva em Porto Capanema (25345435):
+          > Dados disponíveis (pré-aval) = 484 dados, 100.00% da série.
+          > Processou TESTE 1 , 2 , 3 , 4
+          > Dados disponíveis = 484 dados, 100.00% da série.
+          > Regravou arquivos com séries de chuva.
+     - Verificando chuva em São Miguel do Iguaçu (25115408):
+          > Dados disponíveis (pré-aval) = 484 dados, 100.00% da série.
+          > Processou TESTE 1 , 2 , 3 , 4
+          > Dados disponíveis = 484 dados, 100.00% da série.
+          > Regravou arquivos com séries de chuva.
+     - Verificando chuva em Reservatório Salto Caxias (25325329):
+          > Dados disponíveis (pré-aval) = 483 dados,  99.79% da série.
+          > Processou TESTE 1 , 2 , 3 , 4
+          > Dados disponíveis = 483 dados,  99.79% da série.
+          > Regravou arquivos com séries de chuva.
+     - Verificando chuva em Boa Vista da Aparecida (25315021):
+          > Dados disponíveis (pré-aval) = 484 dados, 100.00% da série.
+          > Processou TESTE 1 , 2 , 3 , 4
+          > Dados disponíveis = 484 dados, 100.00% da série.
+          > Regravou arquivos com séries de chuva.
+     - Verificando chuva em Francisco Beltrão (26055305):
+          > Dados disponíveis (pré-aval) = 484 dados, 100.00% da série.
+          > Processou TESTE 1 , 2 , 3 , 4
+          > Dados disponíveis = 484 dados, 100.00% da série.
+          > Regravou arquivos com séries de chuva.
+     - Verificando chuva em Coronel Domingos Soares (25825217):
+          > Dados disponíveis (pré-aval) = 484 dados, 100.00% da série.
+          > Processou TESTE 1 , 2 , 3 , 4
+          > Dados disponíveis = 484 dados, 100.00% da série.
+          > Regravou arquivos com séries de chuva.
+     - Verificando chuva em Derivação do Rio Jordão (25755210):
+          > Dados disponíveis (pré-aval) = 484 dados, 100.00% da série.
+          > Processou TESTE 1 , 2 , 3 , 4
+          > Dados disponíveis = 484 dados, 100.00% da série.
+          > Regravou arquivos com séries de chuva.
+     - Verificando chuva em Bituruna (26065150):
+          > Dados disponíveis (pré-aval) = 484 dados, 100.00% da série.
+          > Processou TESTE 1 , 2 , 3 , 4
+          > Dados disponíveis = 484 dados, 100.00% da série.
+          > Regravou arquivos com séries de chuva.
+
+     - Armazenou dados do arquivo de séries brutas de cota e vazão; 16438 linhas.
+     - Reorganizou dados fluviométricos de 15 minutos em matriz
+     - Verificando cota em Rio Negro (26064948):
+          > Dados disponíveis (pré-aval) = 484 dados, 100.00% da série.
+          > Processou TESTE 5 , 6 , 7
+          > Dados disponíveis = 484 dados, 100.00% da série.
+     - Verificando cota em Porto Amazonas (25334953):
+          > Dados disponíveis (pré-aval) = 484 dados, 100.00% da série.
+          > Processou TESTE 5 , 6 , 7
+          > Dados disponíveis = 484 dados, 100.00% da série.
+     - Verificando cota em São Bento (25564947):
+          > Dados disponíveis (pré-aval) = 484 dados, 100.00% da série.
+          > Processou TESTE 5 , 6 , 7
+          > Dados disponíveis = 484 dados, 100.00% da série.
+     - Verificando cota em Pontilhão (25555031):
+          > Dados disponíveis (pré-aval) = 484 dados, 100.00% da série.
+          > Processou TESTE 5 , 6 , 7
+          > Dados disponíveis = 484 dados, 100.00% da série.
+     - Verificando cota em Santa Cruz do Timbó (26125049):
+          > Dados disponíveis (pré-aval) = 484 dados, 100.00% da série.
+          > Processou TESTE 5 , 6 , 7
+          > Dados disponíveis = 484 dados, 100.00% da série.
+     - Verificando cota em Foz do Timbó (26105047):
+          > Dados disponíveis (pré-aval) = 484 dados, 100.00% da série.
+          > Processou TESTE 5 , 6 , 7
+          > Dados disponíveis = 484 dados, 100.00% da série.
+     - Verificando cota em São Mateus do Sul (25525023):
+          > Dados disponíveis (pré-aval) = 482 dados,  99.59% da série.
+          > Processou TESTE 5 , 6 , 7
+          > Dados disponíveis = 482 dados,  99.59% da série.
+          > Dados preenchidos = 2 dados,   0.41% da série.
+     - Verificando cota em Divisa (26055019):
+          > Dados disponíveis (pré-aval) = 484 dados, 100.00% da série.
+          > Processou TESTE 5 , 6 , 7
+          > Dados disponíveis = 484 dados, 100.00% da série.
+     - Verificando cota em Fluviopolis (26025035):
+          > Dados disponíveis (pré-aval) = 484 dados, 100.00% da série.
+          > Processou TESTE 5 , 6 , 7
+          > Dados disponíveis = 484 dados, 100.00% da série.
+     - Verificando cota em União da Vitória (26145104):
+          > Dados disponíveis (pré-aval) = 484 dados, 100.00% da série.
+          > Processou TESTE 5 , 6 , 7
+          > Dados disponíveis = 484 dados, 100.00% da série.
+     - Verificando cota em Porto Vitória (26105114):
+          > Dados disponíveis (pré-aval) = 484 dados, 100.00% da série.
+          > Processou TESTE 5 , 6 , 7
+          > Dados disponíveis = 484 dados, 100.00% da série.
+     - Verificando cota em Mad. Gavazzoni (25485116):
+          > Dados disponíveis (pré-aval) = 484 dados, 100.00% da série.
+          > Processou TESTE 5 , 6 , 7
+          > Dados disponíveis = 484 dados, 100.00% da série.
+     - Verificando cota em Jangada (26225115):
+          > Dados disponíveis (pré-aval) = 484 dados, 100.00% da série.
+          > Processou TESTE 5 , 6 , 7
+          > Dados disponíveis = 484 dados, 100.00% da série.
+     - Verificando cota em Solais Novo (26055155):
+          > Dados disponíveis (pré-aval) = 481 dados,  99.38% da série.
+          > Processou TESTE 5 , 6 , 7
+          > Dados disponíveis = 481 dados,  99.38% da série.
+          > Dados preenchidos = 3 dados,   0.62% da série.
+     - Verificando cota em Porto Santo Antônio (25235306):
+          > Dados disponíveis (pré-aval) = 483 dados,  99.79% da série.
+          > Processou TESTE 5 , 6 , 7
+          > Dados disponíveis = 483 dados,  99.79% da série.
+          > Dados preenchidos = 1 dados,   0.21% da série.
+     - Verificando cota em Águas do Verê (25465256):
+          > Dados disponíveis (pré-aval) = 484 dados, 100.00% da série.
+          > Processou TESTE 5 , 6 , 7
+          > Dados disponíveis = 484 dados, 100.00% da série.
+     - Verificando cota em Porto Capanema (25345435):
+          > Dados disponíveis (pré-aval) = 484 dados, 100.00% da série.
+          > Processou TESTE 5 , 6 , 7
+          > Dados disponíveis = 484 dados, 100.00% da série.
+     - Verificando cota em Hotel Cataratas (25685442):
+          > Dados disponíveis (pré-aval) = 481 dados,  99.38% da série.
+          > Processou TESTE 5 , 6 , 7
+          > Dados disponíveis = 481 dados,  99.38% da série.
+          > Dados preenchidos = 3 dados,   0.62% da série.
+     - Rio Negro (26064948): Vazões compatíveis.
+          > Regravou arquivos com séries de cota e vazão.
+     - Porto Amazonas (25334953): Vazões compatíveis.
+          > Regravou arquivos com séries de cota e vazão.
+     - São Bento (25564947): Vazões compatíveis.
+          > Regravou arquivos com séries de cota e vazão.
+     - Pontilhão (25555031): Vazões compatíveis.
+          > Regravou arquivos com séries de cota e vazão.
+     - Santa Cruz do Timbó (26125049): Vazões compatíveis.
+          > Regravou arquivos com séries de cota e vazão.
+     - Foz do Timbó (26105047): Vazões compatíveis.
+     - São Mateus do Sul (25525023): Vazões compatíveis.
+          > Regravou arquivos com séries de cota e vazão.
+     - Divisa (26055019): Vazões compatíveis.
+          > Regravou arquivos com séries de cota e vazão.
+     - Fluviopolis (26025035): Vazões compatíveis.
+          > Regravou arquivos com séries de cota e vazão.
+     - União da Vitória (26145104): Vazões compatíveis.
+          > Regravou arquivos com séries de cota e vazão.
+     - Porto Vitória (26105114): Vazões compatíveis.
+     - Mad. Gavazzoni (25485116): Vazões compatíveis.
+          > Regravou arquivos com séries de cota e vazão.
+     - Jangada (26225115): Vazões compatíveis.
+          > Regravou arquivos com séries de cota e vazão.
+     - Solais Novo (26055155): Vazões compatíveis.
+          > Regravou arquivos com séries de cota e vazão.
+     - Porto Santo Antônio (25235306): Vazões compatíveis.
+          > Regravou arquivos com séries de cota e vazão.
+     - Águas do Verê (25465256): Vazões compatíveis.
+          > Regravou arquivos com séries de cota e vazão.
+     - Porto Capanema (25345435): Vazões compatíveis.
+          > Regravou arquivos com séries de cota e vazão.
+     - Hotel Cataratas (25685442): Vazões compatíveis.
+          > Regravou arquivos com séries de cota e vazão.
+
+Salvou o arquivo da UHE - DRJ!
+Salvou o arquivo da UHE - FCH!
+Salvou o arquivo da UHE - GBM!
+Salvou o arquivo da UHE - SCL!
+Salvou o arquivo da UHE - SCX!
+Salvou o arquivo da UHE - SGD!
+Salvou o arquivo da UHE - SOS!
+May 13 20:08:04 vmhidro sendEmail[8306]: Email was sent successfully!
+
+ ~/SISPSHI2/Dados_Bacias/1-cmb.py
+     - Incorporando séries horárias dos pluviômetros:
+          > Vossoroca                 (25494905)
+          > Pinhais                   (25254905)
+          > Curitiba                  (25264916)
+          > Fragosos                  (26094923)
+          > Lapa                      (25474946)
+          > São Bento                (25564947)
+          > Rio Negro                 (26064948)
+          > Porto Amazonas            (25334953)
+          > Ponta Grossa              (25135001)
+          > Divisa                    (26055019)
+          > São Mateus do Sul        (25525023)
+          > Pontilhão                (25555031)
+          > Fluviópolis              (26025035)
+          > Fernandes Pinheiro        (25275035)
+          > Foz do Cachoeira          (26355045)
+          > Foz do Timbó             (26105047)
+          > Santa Cruz do Timbó      (26125049)
+          > União da Vitória Hid.   (26145104)
+          > União da Vitória Met.   (26145103)
+          > Palmital do Meio          (26025109)
+          > Porto Vitória            (26105114)
+          > Jangada                   (26225115)
+          > Madeireira Gavazzoni      (25485116)
+          > Entre Rios                (25335129)
+          > Guarapuava                (25215130)
+          > Foz do Areia Hid.         (26005139)
+          > Foz do Areia Met.         (26055139)
+          > Solais Novo               (26055155)
+          > Pinhão                   (25385157)
+          > Palmas                    (26285158)
+          > Segredo                   (25475206)
+          > Porto Palmeirinha         (26015237)
+          > Pato Branco               (26075241)
+          > Águas do Verê           (25465256)
+          > Salto Osório             (25315301)
+          > Porto Santo Antônio      (25235306)
+          > Foz do Chopim             (25345306)
+          > Balsa Jaracatiá          (25345816)
+          > Salto Caxias Met.         (25315329)
+          > Não encontrou arquivo de dados do posto Salto Caxias Hid.         (25325330)
+          > Não encontrou arquivo de dados do posto Nova Prata do Iguaçu     (25345331)
+          > Cascavel                  (24535333)
+          > Porto Capanema            (25345435)
+          > São Miguel do Iguaçu    (25115408)
+          > Não encontrou arquivo de dados do posto Salto Cataratas           (25415426)
+          > Não encontrou arquivo de dados do posto Foz do Iguaçu            (25245437)
+          > Reservatório Salto Caxias (25325329)
+          > Boa Vista da Aparecida    (25315021)
+          > Francisco Beltrão        (26055305)
+          > Coronel Domingos Soares   (25825217)
+          > Derivação do Rio Jordão (25755210)
+          > Bituruna                  (26065150)
+     - Estimando chuva média nas sub-bacias:
+          > B01 - Rio Negro
+          > B02 - Porto Amazonas
+          > B03 - São Bento
+          > B04 - Pontilhão
+          > B05 - Santa Cruz do Timbó
+          > B06 - São Mateus do Sul
+          > B07 - Divisa
+          > B08 - Fluviópolis
+          > B09 - União da Vitória
+          > B10 - Madereira Gavazzoni
+          > B11 - Jangada
+          > B12 - Foz do Areia
+          > B13 - Solais Novo
+          > B14 - Porto Santo Antônio
+          > B15 - Águas do Verê
+          > B16 - Incremental Foz do Areia - Segredo
+          > B17 - Foz do Chopim
+          > B18 - Santa Clara
+          > B19 - Incremental Salto Osório - Salto Caxias
+          > B20 - Porto Capanema
+          > B21 - Hotel Cataratas
+     - Atualizando séries longas:
+          > Armazenou série longa de CMB na B01
+          > Aplicou redundância entre as séries curta e longa.
+          > Regravou arquivo com séries longas de CMB.
+          > Armazenou série longa de CMB na B02
+          > Aplicou redundância entre as séries curta e longa.
+          > Regravou arquivo com séries longas de CMB.
+          > Armazenou série longa de CMB na B03
+          > Aplicou redundância entre as séries curta e longa.
+          > Regravou arquivo com séries longas de CMB.
+          > Armazenou série longa de CMB na B04
+          > Aplicou redundância entre as séries curta e longa.
+          > Regravou arquivo com séries longas de CMB.
+          > Armazenou série longa de CMB na B05
+          > Aplicou redundância entre as séries curta e longa.
+          > Regravou arquivo com séries longas de CMB.
+          > Armazenou série longa de CMB na B06
+          > Aplicou redundância entre as séries curta e longa.
+          > Regravou arquivo com séries longas de CMB.
+          > Armazenou série longa de CMB na B07
+          > Aplicou redundância entre as séries curta e longa.
+          > Regravou arquivo com séries longas de CMB.
+          > Armazenou série longa de CMB na B08
+          > Aplicou redundância entre as séries curta e longa.
+          > Regravou arquivo com séries longas de CMB.
+          > Armazenou série longa de CMB na B09
+          > Aplicou redundância entre as séries curta e longa.
+          > Regravou arquivo com séries longas de CMB.
+          > Armazenou série longa de CMB na B10
+          > Aplicou redundância entre as séries curta e longa.
+          > Regravou arquivo com séries longas de CMB.
+          > Armazenou série longa de CMB na B11
+          > Aplicou redundância entre as séries curta e longa.
+          > Regravou arquivo com séries longas de CMB.
+          > Armazenou série longa de CMB na B12
+          > Aplicou redundância entre as séries curta e longa.
+          > Regravou arquivo com séries longas de CMB.
+          > Armazenou série longa de CMB na B13
+          > Aplicou redundância entre as séries curta e longa.
+          > Regravou arquivo com séries longas de CMB.
+          > Armazenou série longa de CMB na B14
+          > Aplicou redundância entre as séries curta e longa.
+          > Regravou arquivo com séries longas de CMB.
+          > Armazenou série longa de CMB na B15
+          > Aplicou redundância entre as séries curta e longa.
+          > Regravou arquivo com séries longas de CMB.
+          > Armazenou série longa de CMB na B16
+          > Aplicou redundância entre as séries curta e longa.
+          > Regravou arquivo com séries longas de CMB.
+          > Armazenou série longa de CMB na B17
+          > Aplicou redundância entre as séries curta e longa.
+          > Regravou arquivo com séries longas de CMB.
+          > Armazenou série longa de CMB na B18
+          > Aplicou redundância entre as séries curta e longa.
+          > Regravou arquivo com séries longas de CMB.
+          > Armazenou série longa de CMB na B19
+          > Aplicou redundância entre as séries curta e longa.
+          > Regravou arquivo com séries longas de CMB.
+          > Armazenou série longa de CMB na B20
+          > Aplicou redundância entre as séries curta e longa.
+          > Regravou arquivo com séries longas de CMB.
+          > Armazenou série longa de CMB na B21
+          > Aplicou redundância entre as séries curta e longa.
+          > Regravou arquivo com séries longas de CMB.
+
+----- ENVIO DE RELATORIO -----
+----- ENVIO DE RELATORIO -----
+
+
+ ~/SISPSHI2/Dados_Bacias/2-vazoes.py
+
+     - B01 Rio Negro: Atualizando série longa
+          > Armazenou série longa
+          > Armazenou série curta
+          > Faltam 107 dados,   1.11% da nova série longa.
+          > Preencheu falhas com vazão modelada.
+          > Atualizou séries na B01
+
+     - B02 Porto Amazonas: Atualizando série longa
+          > Armazenou série longa
+          > Armazenou série curta
+          > Faltam 95 dados,   0.99% da nova série longa.
+          > Preencheu falhas com vazão modelada.
+          > Atualizou séries na B02
+
+     - B03 São Bento: Atualizando série longa
+          > Armazenou série longa
+          > Armazenou série curta
+          > Faltam 2791 dados,  29.07% da nova série longa.
+          > Preencheu falhas com vazão modelada.
+          > Atualizou séries na B03
+
+     - B04 Pontilhão: Atualizando série longa
+          > Armazenou série longa
+          > Armazenou série curta
+          > Faltam 153 dados,   1.59% da nova série longa.
+          > Preencheu falhas com vazão modelada.
+          > Atualizou séries na B04
+
+     - B05 Santa Cruz do Timbó: Atualizando série longa
+          > Armazenou série longa
+          > Armazenou série curta
+          > Faltam 50 dados,   0.52% da nova série longa.
+          > Preencheu falhas com vazão modelada.
+          > Atualizou séries na B05
+
+     - B06 São Mateus do Sul: Atualizando série longa
+          > Armazenou série longa
+          > Armazenou série curta
+          > Faltam 526 dados,   5.48% da nova série longa.
+          > Preencheu falhas com vazão modelada.
+          > Atualizou séries na B06
+
+     - B07 Divisa: Atualizando série longa
+          > Armazenou série longa
+          > Armazenou série curta
+          > Nova série longa está completa.
+          > Atualizou séries na B07
+
+     - B08 Fluviópolis: Atualizando série longa
+          > Armazenou série longa
+          > Armazenou série curta
+          > Nova série longa está completa.
+          > Atualizou séries na B08
+
+     - B09 União da Vitória: Atualizando série longa
+          > Armazenou série longa
+          > Armazenou série curta
+          > Faltam 631 dados,   6.57% da nova série longa.
+          > Preencheu falhas com vazão modelada.
+          > Atualizou séries na B09
+
+     - B10 Madereira Gavazzoni: Atualizando série longa
+          > Armazenou série longa
+          > Armazenou série curta
+          > Nova série longa está completa.
+          > Atualizou séries na B10
+
+     - B11 Jangada: Atualizando série longa
+          > Armazenou série longa
+          > Armazenou série curta
+          > Faltam 159 dados,   1.66% da nova série longa.
+          > Preencheu falhas com vazão modelada.
+          > Atualizou séries na B11
+
+     - B12 Foz do Areia: Atualizando série longa
+          > Armazenou série longa
+          > Armazenou série curta
+          > Faltam 797 dados,   8.30% da nova série longa.
+
+ Q0 =  72.5 
+
+
+ Areatot =  29973.0 
+
+
+ Parametros[9] =  0.423901 
+
+
+ Parametros[10] =  0.5150829 
+
+
+ Aux =  0.000529799449088 
+
+          > Preencheu falhas com vazão modelada.
+          > Atualizou séries na B12
+
+     - B13 Solais Novo: Atualizando série longa
+          > Armazenou série longa
+          > Armazenou série curta
+          > Faltam 195 dados,   2.03% da nova série longa.
+          > Preencheu falhas com vazão modelada.
+          > Atualizou séries na B13
+
+     - B14 Porto Santo Antônio: Atualizando série longa
+          > Armazenou série longa
+          > Armazenou série curta
+          > Faltam 1364 dados,  14.21% da nova série longa.
+          > Preencheu falhas com vazão modelada.
+          > Atualizou séries na B14
+
+     - B15 Águas do Verê: Atualizando série longa
+          > Armazenou série longa
+          > Armazenou série curta
+          > Faltam 143 dados,   1.49% da nova série longa.
+          > Preencheu falhas com vazão modelada.
+          > Atualizou séries na B15
+
+     - B16 Incremental Foz do Areia - Segredo: Atualizando série longa
+          > Armazenou série longa
+          > Armazenou série curta
+          > Faltam 931 dados,   9.70% da nova série longa.
+          > Preencheu falhas com vazão modelada.
+          > Atualizou séries na B16
+
+     - B17 Foz do Chopim: Atualizando série longa
+          > Armazenou série longa
+          > Armazenou série curta
+          > Faltam 798 dados,   8.31% da nova série longa.
+          > Preencheu falhas com vazão modelada.
+          > Atualizou séries na B17
+
+     - B18 Santa Clara: Atualizando série longa
+          > Armazenou série longa
+          > Armazenou série curta
+          > Faltam 785 dados,   8.18% da nova série longa.
+          > Preencheu falhas com vazão modelada.
+          > Atualizou séries na B18
+
+     - B19 Incremental Salto Osório - Salto Caxias: Atualizando série longa
+          > Armazenou série longa
+          > Armazenou série curta
+          > Faltam 746 dados,   7.77% da nova série longa.
+          > Preencheu falhas com vazão modelada.
+          > Atualizou séries na B19
+
+     - B20 Porto Capanema: Atualizando série longa
+          > Armazenou série longa
+          > Armazenou série curta
+          > Faltam 60 dados,   0.62% da nova série longa.
+          > Preencheu falhas com vazão modelada.
+          > Atualizou séries na B20
+
+     - B21 Hotel Cataratas: Atualizando série longa
+          > Armazenou série longa
+          > Armazenou série curta
+          > Faltam 21 dados,   0.22% da nova série longa.
+          > Preencheu falhas com vazão modelada.
+          > Atualizou séries na B21
+http://www.simepar.br/rest-forecasts/api/forecasts?type=hourly&source=14&location_id=1&customer_id=1
+Gerou arquivo de CMB prev para bacia 01
+http://www.simepar.br/rest-forecasts/api/forecasts?type=hourly&source=14&location_id=2&customer_id=1
+Gerou arquivo de CMB prev para bacia 02
+http://www.simepar.br/rest-forecasts/api/forecasts?type=hourly&source=14&location_id=3&customer_id=1
+Gerou arquivo de CMB prev para bacia 03
+http://www.simepar.br/rest-forecasts/api/forecasts?type=hourly&source=14&location_id=4&customer_id=1
+Gerou arquivo de CMB prev para bacia 04
+http://www.simepar.br/rest-forecasts/api/forecasts?type=hourly&source=14&location_id=6&customer_id=1
+Gerou arquivo de CMB prev para bacia 06
+http://www.simepar.br/rest-forecasts/api/forecasts?type=hourly&source=14&location_id=7&customer_id=1
+Gerou arquivo de CMB prev para bacia 07
+http://www.simepar.br/rest-forecasts/api/forecasts?type=hourly&source=14&location_id=8&customer_id=1
+Gerou arquivo de CMB prev para bacia 08
+http://www.simepar.br/rest-forecasts/api/forecasts?type=hourly&source=14&location_id=5&customer_id=1
+Gerou arquivo de CMB prev para bacia 05
+http://www.simepar.br/rest-forecasts/api/forecasts?type=hourly&source=14&location_id=9&customer_id=1
+Gerou arquivo de CMB prev para bacia 09
+http://www.simepar.br/rest-forecasts/api/forecasts?type=hourly&source=14&location_id=10&customer_id=1
+Gerou arquivo de CMB prev para bacia 10
+http://www.simepar.br/rest-forecasts/api/forecasts?type=hourly&source=14&location_id=11&customer_id=1
+Gerou arquivo de CMB prev para bacia 11
+http://www.simepar.br/rest-forecasts/api/forecasts?type=hourly&source=14&location_id=12&customer_id=1
+Gerou arquivo de CMB prev para bacia 12
+http://www.simepar.br/rest-forecasts/api/forecasts?type=hourly&source=14&location_id=13&customer_id=1
+Gerou arquivo de CMB prev para bacia 13
+http://www.simepar.br/rest-forecasts/api/forecasts?type=hourly&source=14&location_id=14&customer_id=1
+Gerou arquivo de CMB prev para bacia 14
+http://www.simepar.br/rest-forecasts/api/forecasts?type=hourly&source=14&location_id=15&customer_id=1
+Gerou arquivo de CMB prev para bacia 15
+http://www.simepar.br/rest-forecasts/api/forecasts?type=hourly&source=14&location_id=16&customer_id=1
+Gerou arquivo de CMB prev para bacia 16
+http://www.simepar.br/rest-forecasts/api/forecasts?type=hourly&source=14&location_id=17&customer_id=1
+Gerou arquivo de CMB prev para bacia 17
+http://www.simepar.br/rest-forecasts/api/forecasts?type=hourly&source=14&location_id=18&customer_id=1
+Gerou arquivo de CMB prev para bacia 18
+http://www.simepar.br/rest-forecasts/api/forecasts?type=hourly&source=14&location_id=19&customer_id=1
+Gerou arquivo de CMB prev para bacia 19
+http://www.simepar.br/rest-forecasts/api/forecasts?type=hourly&source=14&location_id=20&customer_id=1
+Gerou arquivo de CMB prev para bacia 20
+http://www.simepar.br/rest-forecasts/api/forecasts?type=hourly&source=14&location_id=21&customer_id=1
+Gerou arquivo de CMB prev para bacia 21
+
+ ~/SISPSHI2/Conceitual/2.1-prev_conceitual.py
+
+     > Simulações entre 2021-02-02 19:00:00 e 2021-05-20 19:00:00, com previsão a partir de 2021-05-13 20:00:00.
+
+     > Reconheceu 80 simulações.
+     > Simulação 0112:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 0114:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 0116:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 0117:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 0212:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 0214:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 0216:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 0217:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 0312:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 0314:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 0316:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 0317:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 0412:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 0414:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 0416:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 0417:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 0512:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 0514:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 0516:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 0517:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 0612:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 0614:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 0616:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 0617:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 0712:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 0714:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 0716:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 0717:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 0812:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 0814:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 0816:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 0817:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 0912:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 0914:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 0916:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 0917:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 1010:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 1012:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 1014:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 1015:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 1110:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 1112:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 1114:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 1115:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 1210:  Inputs OK! 
+ Q0 =  nan 
+
+
+ Areatot =  29973.0 
+
+
+ Parametros[9] =  0.05355 
+
+
+ Parametros[10] =  1.0 
+
+
+ Aux =  nan 
+
+| Simulação OK! | Outputs OK!
+     > Simulação 1212:  Inputs OK! 
+ Q0 =  nan 
+
+
+ Areatot =  29973.0 
+
+
+ Parametros[9] =  0.05355 
+
+
+ Parametros[10] =  1.0 
+
+
+ Aux =  nan 
+
+| Simulação OK! | Outputs OK!
+     > Simulação 1214:  Inputs OK! 
+ Q0 =  nan 
+
+
+ Areatot =  29973.0 
+
+
+ Parametros[9] =  0.05355 
+
+
+ Parametros[10] =  1.0 
+
+
+ Aux =  nan 
+
+| Simulação OK! | Outputs OK!
+     > Simulação 1215:  Inputs OK! 
+ Q0 =  nan 
+
+
+ Areatot =  29973.0 
+
+
+ Parametros[9] =  0.05355 
+
+
+ Parametros[10] =  1.0 
+
+
+ Aux =  nan 
+
+| Simulação OK! | Outputs OK!
+     > Simulação 1218:  Inputs OK! 
+ Q0 =  nan 
+
+
+ Areatot =  29973.0 
+
+
+ Parametros[9] =  0.423901 
+
+
+ Parametros[10] =  0.5150829 
+
+
+ Aux =  nan 
+
+| Simulação OK! | Outputs OK!
+     > Simulação 1219:  Inputs OK! 
+ Q0 =  nan 
+
+
+ Areatot =  29973.0 
+
+
+ Parametros[9] =  0.423901 
+
+
+ Parametros[10] =  0.5150829 
+
+
+ Aux =  nan 
+
+| Simulação OK! | Outputs OK!
+     > Simulação 1310:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 1312:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 1314:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 1315:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 1410:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 1412:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 1414:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 1415:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 1510:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 1512:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 1514:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 1515:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 1610:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 1612:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 1614:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 1615:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 1710:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 1712:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 1714:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 1715:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 1810:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 1812:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 1910:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 1912:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 2010:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 2012:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 2110:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 2112:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 2114:  Inputs OK! | Simulação OK! | Outputs OK!
+     > Simulação 2115:  Inputs OK! | Simulação OK! | Outputs OK!
+
+    Etapa de simulação hidrológica concluída.
+
+
+     ~/SISPSHI2/Historico_Previsoes/1-armazena_prev_conceitual.py
+
+     > Simulação:  112 114 116 117 212 214 216 217 312 314 316 317 412 414 416 417 512 514 516 517 612 614 616 617 712 714 716 717 812 814 816 817 912 914 916 917 1010 1012 1014 1015 1110 1112 1114 1115 1210 1212 1214 1215 1218 1219 1310 1312 1314 1315 1410 1412 1414 1415 1510 1512 1514 1515 1610 1612 1614 1615 1710 1712 1714 1715 1810 1812 1910 1912 2010 2012 2110 2112 2114 2115 
+
+
+ ~/SISPSHI2/Site_Update/1-json_observados.py
+ > gravou arquivos json de chuva, nível e vazão
+
+
+ ~/SISPSHI2/Site_Update/2-json_historico.py
+     - Gravou arquivo JSON das séries históricas de B01.
+     - Gravou arquivo JSON das séries históricas de B02.
+     - Gravou arquivo JSON das séries históricas de B03.
+     - Gravou arquivo JSON das séries históricas de B04.
+     - Gravou arquivo JSON das séries históricas de B05.
+     - Gravou arquivo JSON das séries históricas de B06.
+     - Gravou arquivo JSON das séries históricas de B07.
+     - Gravou arquivo JSON das séries históricas de B08.
+     - Gravou arquivo JSON das séries históricas de B09.
+     - Gravou arquivo JSON das séries históricas de B10.
+     - Gravou arquivo JSON das séries históricas de B11.
+     - Gravou arquivo JSON das séries históricas de B12.
+     - Gravou arquivo JSON das séries históricas de B13.
+     - Gravou arquivo JSON das séries históricas de B14.
+     - Gravou arquivo JSON das séries históricas de B15.
+     - Gravou arquivo JSON das séries históricas de B16.
+     - Gravou arquivo JSON das séries históricas de B17.
+     - Gravou arquivo JSON das séries históricas de B18.
+     - Gravou arquivo JSON das séries históricas de B19.
+     - Gravou arquivo JSON das séries históricas de B20.
+     - Gravou arquivo JSON das séries históricas de B21.
+ ~/SISPSHI2/Site_Update/6-json_dados.py
+
+ > Bacia 01:   112,   114,   116,   117,  
+ > Bacia 02:   212,   214,   216,   217,  
+ > Bacia 03:   312,   314,   316,   317,  
+ > Bacia 04:   412,   414,   416,   417,  
+ > Bacia 05:   512,   514,   516,   517,  
+ > Bacia 06:   612,   614,   616,   617,  
+ > Bacia 07:   712,   714,   716,   717,  
+ > Bacia 08:   812,   814,   816,   817,  
+ > Bacia 09:   912,   914,   916,   917,  
+ > Bacia 10:  1010,  1012,  1014,  1015,  
+ > Bacia 11:  1110,  1112,  1114,  1115,  
+ > Bacia 12:  1210,  1212,  1214,  1215,  1218,  1219,  
+ > Bacia 13:  1310,  1312,  1314,  1315,  
+ > Bacia 14:  1410,  1412,  1414,  1415,  
+ > Bacia 15:  1510,  1512,  1514,  1515,  
+ > Bacia 16:  1610,  1612,  1614,  1615,  
+ > Bacia 17:  1710,  1712,  1714,  1715,  
+ > Bacia 18:  1810,  1812,  
+ > Bacia 19:  1910,  1912,  
+ > Bacia 20:  2010,  2012,  
+ > Bacia 21:  2110,  2112,  2114,  2115,  
+ > MPA = 45.0
+ > Fator Inc. Segredo = 21.537
+
+ ~/SISPSHI2/Site_Update/7-planilhas.py
+ > Planilhas atualizadas!
+
+
+~/SISPSHI2/Site_Update/5-xml_copelger.py
+ removeu prevsComChuva_2021021216.xml do historico
+ removeu prevsSemChuva_2021021216.xml do historico
+Resultados - processando jsons da bacia 01
+Resultados - processando jsons da bacia 02
+Resultados - processando jsons da bacia 03
+Resultados - processando jsons da bacia 04
+Resultados - processando jsons da bacia 05
+Resultados - processando jsons da bacia 06
+Resultados - processando jsons da bacia 07
+Resultados - processando jsons da bacia 08
+Resultados - processando jsons da bacia 09
+Resultados - processando jsons da bacia 10
+Resultados - processando jsons da bacia 11
+Resultados - processando jsons da bacia 12
+Resultados - processando jsons da bacia 13
+Resultados - processando jsons da bacia 14
+Resultados - processando jsons da bacia 15
+Resultados - processando jsons da bacia 16
+Resultados - processando jsons da bacia 17
+Resultados - processando jsons da bacia 18
+Resultados - processando jsons da bacia 19
+Resultados - processando jsons da bacia 20
+Resultados - processando jsons da bacia 21
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+INSERT 0 0
+psql:insere_copel_sispshi.sql:3529: AVISO:  não há uma transação em execução
+COMMIT

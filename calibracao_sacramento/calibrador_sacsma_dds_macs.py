@@ -69,8 +69,8 @@ def sim(X):
 
 
 ### LEITURA FORÇANTES
-bn = 3
-bnome = 'Sao_Bento'
+bn = 15
+bnome = 'Aguas_do_Vere'
 area = pd.read_csv(f'../PEQ/{bn:02d}_{bnome}_peq.csv', nrows=1, header=None).values[0][0]
 dt = 0.25 # 6 hr
 PEQ = pd.read_csv(f'../PEQ/{bn:02d}_{bnome}_peq.csv', skiprows=1,
