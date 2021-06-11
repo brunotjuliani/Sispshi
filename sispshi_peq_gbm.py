@@ -9,6 +9,7 @@ bacia_nome = 'Foz_do_Areia_mod'
 sig_bacia = 'GBM'
 cod_bacia = '12'
 area_inc = '5937'
+area_tot = '30157'
 
 precip = pd.read_csv(f'./Dados_Usinas/{cod_bacia}_{bacia_nome}_PME.csv',
                      index_col = 0, parse_dates=True)
@@ -71,12 +72,21 @@ dados_peq['etp'] = dados_peq['data'].map(etp['etp'])
 dados_peq = dados_peq.drop(['data'], axis=1)
 dados_peq = dados_peq[['pme','etp','qaflu','qjus','qmon']]
 
+dados_peq['qmon'] = dados_peq['qmon'].interpolate(method='spline', order=3)
+
+with open(f'./PEQ_hr/{cod_bacia}_{bacia_nome}_peq_hr.csv', 'w', newline = '') as file:
+    writer = csv.writer(file)
+    writer.writerow([area_inc, area_tot])
+dados_peq.to_csv(f'./PEQ_hr/{cod_bacia}_{bacia_nome}_peq_hr.csv', mode = 'a',
+                 date_format='%Y-%m-%dT%H:%M:%S+00:00', sep = ",", float_format='%.3f')
+print('Finalizado PEQ horario - ' + cod_bacia + ' - ' + bacia_nome)
+
 dados_6hrs = (dados_peq.resample("6H", closed='right', label = 'right').
               agg({'pme':np.sum, 'etp':np.sum, 'qaflu':np.mean,
                    'qjus':np.mean, 'qmon':np.mean}))
 dados_6hrs = dados_6hrs.iloc[1:]
 
-dados_6hrs['qmon'] = dados_6hrs['qmon'].interpolate(method='spline', order=3)
+#dados_6hrs['qmon'] = dados_6hrs['qmon'].interpolate(method='spline', order=3)
 
 dados_6hrs['pme'] = dados_6hrs['pme'].apply('{:.2f}'.format)
 dados_6hrs['etp'] = dados_6hrs['etp'].apply('{:.3f}'.format)
@@ -86,18 +96,39 @@ dados_6hrs['qmon'] = dados_6hrs['qmon'].apply('{:.3f}'.format)
 
 with open(f'./PEQ/{cod_bacia}_{bacia_nome}_peq.csv', 'w', newline = '') as file:
     writer = csv.writer(file)
-    writer.writerow([area_inc])
+    writer.writerow([area_inc, area_tot])
 dados_6hrs.to_csv(f'./PEQ/{cod_bacia}_{bacia_nome}_peq.csv', mode = 'a',
                  date_format='%Y-%m-%dT%H:%M:%S+00:00', sep = ",")
 print('Finalizado PEQ - ' + cod_bacia + ' - ' + bacia_nome)
 
+# fig = go.Figure()
+# fig.add_trace(go.Scatter(x=dados_6hrs.index, y=dados_6hrs['qmon'], name="Q montante (m3/s)", marker_color='blue'))
+# fig.add_trace(go.Scatter(x=dados_6hrs.index, y=dados_6hrs['qaflu'], name="Q afluente (m3/s)", marker_color='purple'))
+# fig.add_trace(go.Scatter(x=dados_6hrs.index, y=dados_6hrs['qjus'], name="Q 24 (m3/s)", marker_color='red'))
+# fig.update_yaxes(title_text='Vazão [m3s-1]')
+# fig.update_xaxes(tickformat="%Y-%m-%d %H")
+# fig.update_layout(autosize=False,width=800,height=400,margin=dict(l=30,r=30,b=10,t=10))
+# fig.write_html(f'./Dados_Usinas/comp_{bacia_nome}.html')
+# #fig.write_image(f'./Resultados/{dispara.month:02d}_{dispara.day:02d}/{sigla}.png')
+# fig.show()
+
 fig = go.Figure()
-fig.add_trace(go.Scatter(x=dados_6hrs.index, y=dados_6hrs['qmon'], name="Q montante (m3/s)", marker_color='blue'))
-fig.add_trace(go.Scatter(x=dados_6hrs.index, y=dados_6hrs['qaflu'], name="Q afluente (m3/s)", marker_color='purple'))
-fig.add_trace(go.Scatter(x=dados_6hrs.index, y=dados_6hrs['qjus'], name="Q 24 (m3/s)", marker_color='red'))
+fig.add_trace(go.Scatter(x=dados_peq.index, y=dados_peq['qaflu'], name="Q afluente (m3/s)", marker_color='purple'))
+fig.add_trace(go.Scatter(x=dados_peq.index, y=dados_peq['qjus'], name="Q 24 (m3/s)", marker_color='red'))
+fig.add_trace(go.Scatter(x=dados_peq.index, y=dados_peq['qmon'], name="Q montante (m3/s)", marker_color='blue'))
 fig.update_yaxes(title_text='Vazão [m3s-1]')
 fig.update_xaxes(tickformat="%Y-%m-%d %H")
-fig.update_layout(autosize=False,width=800,height=400,margin=dict(l=30,r=30,b=10,t=10))
-fig.write_html(f'./Dados_Usinas/comp_{bacia_nome}.html')
-#fig.write_image(f'./Resultados/{dispara.month:02d}_{dispara.day:02d}/{sigla}.png')
+fig.update_layout(autosize=False,width=1000,height=500,margin=dict(l=30,r=30,b=10,t=10))
+fig.write_html(f'./Dados_Usinas/comp_gbm_uva.html')
+fig.show()
+
+dados_peq = dados_peq.loc['2020':]
+fig = go.Figure()
+fig.add_trace(go.Scatter(x=dados_peq.index, y=dados_peq['qaflu'], name="Q afluente (m3/s)", marker_color='purple'))
+fig.add_trace(go.Scatter(x=dados_peq.index, y=dados_peq['qjus'], name="Q 24 (m3/s)", marker_color='red'))
+fig.add_trace(go.Scatter(x=dados_peq.index, y=dados_peq['qmon'], name="Q montante (m3/s)", marker_color='blue'))
+fig.update_yaxes(title_text='Vazão [m3s-1]')
+fig.update_xaxes(tickformat="%Y-%m-%d %H")
+fig.update_layout(autosize=False,width=1000,height=500,margin=dict(l=30,r=30,b=10,t=10))
+fig.write_image(f'./Dados_Usinas/comp_gbm_uva.png')
 fig.show()

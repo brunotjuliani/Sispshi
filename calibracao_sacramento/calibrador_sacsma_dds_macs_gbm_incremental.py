@@ -72,6 +72,7 @@ def sim(X):
 bn = 12
 bnome = 'Foz_do_Areia_mod'
 area = pd.read_csv(f'../PEQ/{bn:02d}_{bnome}_peq.csv', nrows=1, header=None).values[0][0]
+areatot = pd.read_csv(f'../PEQ/{bn:02d}_{bnome}_peq.csv', nrows=1, header=None).values[0][1]
 dt = 0.25 # 6 hr
 PEQ = pd.read_csv(f'../PEQ/{bn:02d}_{bnome}_peq.csv', skiprows=1,
                   parse_dates=True, index_col='datahora')
@@ -152,11 +153,11 @@ fig.update_layout(legend_title_text='Comparação Modelo Sacramento')
 fig.update_layout(autosize=False,width=800,height=450,margin=dict(l=30,r=30,b=10,t=10))
 fig.show()
 
-# df_params = pd.DataFrame()
-# df_params['Parametros'] = Xnomes
-# df_params['Par_LOG'] = X1
-# df_params['Par_DRMS'] = X2
-# df_params['Par_MACS'] = X3
-# df_params['Par_NSE'] = X4
-#
-# df_params.to_csv(f'./param_macs/param_macs_{bn:02d}_{bnome}.csv', index=False)
+df_params = pd.DataFrame()
+df_params['Parametros'] = Xnomes
+df_params['Par_LOG'] = X1
+df_params['Par_DRMS'] = X2
+df_params['Par_MACS'] = X3
+df_params['Par_NSE'] = X4
+
+df_params.to_csv(f'./param_macs/param_macs_{bn:02d}_{bnome}_incremental.csv', index=False)
