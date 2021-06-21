@@ -39,6 +39,12 @@ vazao = pd.DataFrame(vazao_usina['qaflu'])
 #Período com dados estranhos
 #vazao['Qaflu'].loc['2019-09':'2020-04'] = np.nan
 vazao['qjus'] = vazao['qaflu'].rolling(window=24, min_periods=1).mean()
+vazao['q4'] = vazao['qaflu'].rolling(window=4, min_periods=1).mean()
+vazao['q6'] = vazao['qaflu'].rolling(window=6, min_periods=1).mean()
+vazao['q12'] = vazao['qaflu'].rolling(window=12, min_periods=1).mean()
+vazao['q24'] = vazao['qaflu'].rolling(window=24, min_periods=1).mean()
+vazao['q36'] = vazao['qaflu'].rolling(window=36, min_periods=1).mean()
+vazao['q48'] = vazao['qaflu'].rolling(window=48, min_periods=1).mean()
 if vazao.index[0] > data_inicial:
     data_inicial = vazao.index[0]
 if vazao.index[-1] < data_final:
@@ -58,6 +64,7 @@ if dados_mont.index[-1] < data_final:
 dados_peq = pd.merge(dados_peq, dados_mont['qmon'], how = 'outer',
                  left_index = True, right_index = True)
 dados_peq = dados_peq.loc[data_inicial:data_final]
+dados_peq
 
 etp = pd.read_csv(f'./ETP/etpclim_{cod_bacia}.txt', header = None)
 etp['Mes'] = etp[0].str.slice(0,2)
@@ -70,15 +77,16 @@ etp.index = etp['Mes'] + '-' + etp['Dia'] + '-' + etp['Hora']
 dados_peq['data'] = dados_peq.index.strftime('%m-%d-%H')
 dados_peq['etp'] = dados_peq['data'].map(etp['etp'])
 dados_peq = dados_peq.drop(['data'], axis=1)
-dados_peq = dados_peq[['pme','etp','qaflu','qjus','qmon']]
+dados_peq
+#dados_peq = dados_peq[['pme','etp','qaflu','qjus','qmon']]
 
 dados_peq['qmon'] = dados_peq['qmon'].interpolate(method='spline', order=3)
 
-with open(f'./PEQ_hr/{cod_bacia}_{bacia_nome}_peq_hr.csv', 'w', newline = '') as file:
-    writer = csv.writer(file)
-    writer.writerow([area_inc, area_tot])
-dados_peq.to_csv(f'./PEQ_hr/{cod_bacia}_{bacia_nome}_peq_hr.csv', mode = 'a',
-                 date_format='%Y-%m-%dT%H:%M:%S+00:00', sep = ",", float_format='%.3f')
+# with open(f'./PEQ_hr/{cod_bacia}_{bacia_nome}_peq_hr.csv', 'w', newline = '') as file:
+#     writer = csv.writer(file)
+#     writer.writerow([area_inc, area_tot])
+# dados_peq.to_csv(f'./PEQ_hr/{cod_bacia}_{bacia_nome}_peq_hr.csv', mode = 'a',
+#                  date_format='%Y-%m-%dT%H:%M:%S+00:00', sep = ",", float_format='%.3f')
 print('Finalizado PEQ horario - ' + cod_bacia + ' - ' + bacia_nome)
 
 dados_6hrs = (dados_peq.resample("6H", closed='right', label = 'right').
@@ -94,11 +102,11 @@ dados_6hrs['qaflu'] = dados_6hrs['qaflu'].apply('{:.3f}'.format)
 dados_6hrs['qjus'] = dados_6hrs['qjus'].apply('{:.3f}'.format)
 dados_6hrs['qmon'] = dados_6hrs['qmon'].apply('{:.3f}'.format)
 
-with open(f'./PEQ/{cod_bacia}_{bacia_nome}_peq.csv', 'w', newline = '') as file:
-    writer = csv.writer(file)
-    writer.writerow([area_inc, area_tot])
-dados_6hrs.to_csv(f'./PEQ/{cod_bacia}_{bacia_nome}_peq.csv', mode = 'a',
-                 date_format='%Y-%m-%dT%H:%M:%S+00:00', sep = ",")
+# with open(f'./PEQ/{cod_bacia}_{bacia_nome}_peq.csv', 'w', newline = '') as file:
+#     writer = csv.writer(file)
+#     writer.writerow([area_inc, area_tot])
+# dados_6hrs.to_csv(f'./PEQ/{cod_bacia}_{bacia_nome}_peq.csv', mode = 'a',
+#                  date_format='%Y-%m-%dT%H:%M:%S+00:00', sep = ",")
 print('Finalizado PEQ - ' + cod_bacia + ' - ' + bacia_nome)
 
 # fig = go.Figure()
@@ -113,22 +121,27 @@ print('Finalizado PEQ - ' + cod_bacia + ' - ' + bacia_nome)
 # fig.show()
 
 fig = go.Figure()
-fig.add_trace(go.Scatter(x=dados_peq.index, y=dados_peq['qaflu'], name="Q afluente (m3/s)", marker_color='purple'))
-fig.add_trace(go.Scatter(x=dados_peq.index, y=dados_peq['qjus'], name="Q 24 (m3/s)", marker_color='red'))
-fig.add_trace(go.Scatter(x=dados_peq.index, y=dados_peq['qmon'], name="Q montante (m3/s)", marker_color='blue'))
+fig.add_trace(go.Scatter(x=dados_peq.index, y=dados_peq['qaflu'], name="Q afluente (m3/s)", marker_color='gray'))
+fig.add_trace(go.Scatter(x=dados_peq.index, y=dados_peq['q4'], name="Q 4 (m3/s)", marker_color='cornflowerblue'))
+fig.add_trace(go.Scatter(x=dados_peq.index, y=dados_peq['q6'], name="Q 6 (m3/s)", marker_color='darkcyan'))
+fig.add_trace(go.Scatter(x=dados_peq.index, y=dados_peq['q12'], name="Q 12 (m3/s)", marker_color='seagreen'))
+fig.add_trace(go.Scatter(x=dados_peq.index, y=dados_peq['q24'], name="Q 24 (m3/s)", marker_color='slateblue'))
+fig.add_trace(go.Scatter(x=dados_peq.index, y=dados_peq['q36'], name="Q 36 (m3/s)", marker_color='darkviolet'))
+fig.add_trace(go.Scatter(x=dados_peq.index, y=dados_peq['q48'], name="Q 48 (m3/s)", marker_color='mediumvioletred'))
+fig.add_trace(go.Scatter(x=dados_peq.index, y=dados_peq['qmon'], name="Q UVA (m3/s)", marker_color='red'))
 fig.update_yaxes(title_text='Vazão [m3s-1]')
 fig.update_xaxes(tickformat="%Y-%m-%d %H")
 fig.update_layout(autosize=False,width=1000,height=500,margin=dict(l=30,r=30,b=10,t=10))
 fig.write_html(f'./Dados_Usinas/comp_gbm_uva.html')
 fig.show()
 
-dados_peq = dados_peq.loc['2020':]
-fig = go.Figure()
-fig.add_trace(go.Scatter(x=dados_peq.index, y=dados_peq['qaflu'], name="Q afluente (m3/s)", marker_color='purple'))
-fig.add_trace(go.Scatter(x=dados_peq.index, y=dados_peq['qjus'], name="Q 24 (m3/s)", marker_color='red'))
-fig.add_trace(go.Scatter(x=dados_peq.index, y=dados_peq['qmon'], name="Q montante (m3/s)", marker_color='blue'))
-fig.update_yaxes(title_text='Vazão [m3s-1]')
-fig.update_xaxes(tickformat="%Y-%m-%d %H")
-fig.update_layout(autosize=False,width=1000,height=500,margin=dict(l=30,r=30,b=10,t=10))
-fig.write_image(f'./Dados_Usinas/comp_gbm_uva.png')
-fig.show()
+# dados_peq = dados_peq.loc['2020':]
+# fig = go.Figure()
+# fig.add_trace(go.Scatter(x=dados_peq.index, y=dados_peq['qaflu'], name="Q afluente (m3/s)", marker_color='purple'))
+# fig.add_trace(go.Scatter(x=dados_peq.index, y=dados_peq['qjus'], name="Q 24 (m3/s)", marker_color='red'))
+# fig.add_trace(go.Scatter(x=dados_peq.index, y=dados_peq['qmon'], name="Q montante (m3/s)", marker_color='blue'))
+# fig.update_yaxes(title_text='Vazão [m3s-1]')
+# fig.update_xaxes(tickformat="%Y-%m-%d %H")
+# fig.update_layout(autosize=False,width=1000,height=500,margin=dict(l=30,r=30,b=10,t=10))
+# fig.write_image(f'./Dados_Usinas/comp_gbm_uva.png')
+# fig.show()

@@ -55,20 +55,20 @@ Qsim_ant = Qsim_ant.loc['2020':].dropna()
 # Simul_Inc = Simul.copy().loc['2015':'2021']
 # PME_Inc = PME.copy().loc['2015':'2021']
 
-# fig = make_subplots(rows=3, cols=1, shared_xaxes=True, specs=[[{'rowspan': 1, 'colspan': 1}],[{'rowspan': 2, 'colspan': 1}],[{'rowspan': 0, 'colspan': 0}]])
-# fig.add_trace(go.Scatter(x=PME.index, y=PME, name="PME (mm)"), row=1, col=1)
-# fig['layout']['yaxis']['autorange'] = "reversed"
-# #fig.add_trace(go.Scatter(x=PEQ.index, y=ETP, name="ETP (mm)"), row=1, col=1)
-# fig.add_trace(go.Scatter(x=Simul.index, y=Simul['Incremental'], name="Incremental Obs. (m3/s)", marker_color='black'), row=2, col=1)
-# fig.add_trace(go.Scatter(x=Simul.index, y=Simul['MACS'], name='Calibração MACS', marker_color='green'), row=2, col=1)
-# fig.add_trace(go.Scatter(x=Simul.index, y=Simul['NSE'], name='Calibração NSE', marker_color='red'), row=2, col=1)
-# fig.update_yaxes(title_text='Chuva [mm]', row=1, col=1)
-# fig.update_yaxes(title_text='Vazão [m3s-1]', row=2, col=1)
-# fig.update_layout(legend_title_text='Comparação Modelo Sacramento')
-# fig.update_layout(autosize=False,width=1000,height=500,margin=dict(l=30,r=30,b=10,t=10))
-# #fig.write_html(f'./param_macs/teste_calib_{bn:02d}_{bnome}_incremental.html')
-# fig.write_image(f'./param_macs/teste_calib_{bn:02d}_{bnome}_incremental.png')
-# fig.show()
+fig = make_subplots(rows=3, cols=1, shared_xaxes=True, specs=[[{'rowspan': 1, 'colspan': 1}],[{'rowspan': 2, 'colspan': 1}],[{'rowspan': 0, 'colspan': 0}]])
+fig.add_trace(go.Scatter(x=PME.index, y=PME, name="PME (mm)"), row=1, col=1)
+fig['layout']['yaxis']['autorange'] = "reversed"
+#fig.add_trace(go.Scatter(x=PEQ.index, y=ETP, name="ETP (mm)"), row=1, col=1)
+fig.add_trace(go.Scatter(x=Simul.index, y=Simul['Incremental'], name="Incremental Obs. (m3/s)", marker_color='black'), row=2, col=1)
+fig.add_trace(go.Scatter(x=Simul.index, y=Simul['MACS'], name='Calibração M.E.', marker_color='green'), row=2, col=1)
+fig.add_trace(go.Scatter(x=Simul.index, y=Simul['NSE'], name='Calibração NSE', marker_color='red'), row=2, col=1)
+fig.update_yaxes(title_text='Chuva [mm]', row=1, col=1)
+fig.update_yaxes(title_text='Vazão [m3s-1]', row=2, col=1)
+fig.update_layout(legend_title_text='Comparação Modelo Sacramento')
+fig.update_layout(autosize=False,width=1000,height=500,margin=dict(l=30,r=30,b=10,t=10))
+#fig.write_html(f'./param_macs/teste_calib_{bn:02d}_{bnome}_incremental.html')
+fig.write_image(f'./param_macs/teste_calib_{bn:02d}_{bnome}_incremental.png')
+fig.show()
 
 
 # print('Nash MACS = ' + str(he.nse(Simul_Inc['MACS'],Simul_Inc['Incremental'])))
@@ -82,22 +82,22 @@ Qsim_ant = Qsim_ant.loc['2020':].dropna()
 
 
 
-fig = make_subplots(rows=3, cols=1, shared_xaxes=True, specs=[[{'rowspan': 1, 'colspan': 1}],[{'rowspan': 2, 'colspan': 1}],[{'rowspan': 0, 'colspan': 0}]])
-fig.add_trace(go.Scatter(x=PME.index, y=PME, name="PME (mm)"), row=1, col=1)
-fig['layout']['yaxis']['autorange'] = "reversed"
-#fig.add_trace(go.Scatter(x=PEQ.index, y=ETP, name="ETP (mm)"), row=1, col=1)
-fig.add_trace(go.Scatter(x=Simul.index, y=Simul['Qjus'], name="Q Obs. (m3/s)", marker_color='black'), row=2, col=1)
-fig.add_trace(go.Scatter(x=Simul.index, y=Simul['Qmacs'], name='Calibração MACS', marker_color='green'), row=2, col=1)
-fig.add_trace(go.Scatter(x=Simul.index, y=Simul['Qnse'], name='Calibração NSE', marker_color='red'), row=2, col=1)
-fig.add_trace(go.Scatter(x=Qsim_ant.index, y=Qsim_ant['qsim_antigo'], name='Operacional', marker_color='purple'), row=2, col=1)
-fig.add_trace(go.Scatter(x=Simul.index, y=Simul['Qmon'], name='Q UVA (m3/s)', marker_color='navy'), row=2, col=1)
-fig.update_yaxes(title_text='Chuva [mm]', row=1, col=1)
-fig.update_yaxes(title_text='Vazão [m3s-1]', row=2, col=1)
-fig.update_layout(legend_title_text='Comparação Modelo Sacramento')
-fig.update_layout(autosize=False,width=1000,height=500,margin=dict(l=30,r=30,b=10,t=10))
-#fig.write_html(f'./param_macs/teste_calib_{bn:02d}_{bnome}_total.html')
-fig.write_image(f'./param_macs/teste_calib_{bn:02d}_{bnome}_total.png')
-fig.show()
+# fig = make_subplots(rows=3, cols=1, shared_xaxes=True, specs=[[{'rowspan': 1, 'colspan': 1}],[{'rowspan': 2, 'colspan': 1}],[{'rowspan': 0, 'colspan': 0}]])
+# fig.add_trace(go.Scatter(x=PME.index, y=PME, name="PME (mm)"), row=1, col=1)
+# fig['layout']['yaxis']['autorange'] = "reversed"
+# #fig.add_trace(go.Scatter(x=PEQ.index, y=ETP, name="ETP (mm)"), row=1, col=1)
+# fig.add_trace(go.Scatter(x=Simul.index, y=Simul['Qjus'], name="Q Obs. (m3/s)", marker_color='black'), row=2, col=1)
+# fig.add_trace(go.Scatter(x=Simul.index, y=Simul['Qmacs'], name='Calibração M.E.', marker_color='green'), row=2, col=1)
+# fig.add_trace(go.Scatter(x=Simul.index, y=Simul['Qnse'], name='Calibração NSE', marker_color='red'), row=2, col=1)
+# fig.add_trace(go.Scatter(x=Qsim_ant.index, y=Qsim_ant['qsim_antigo'], name='Operacional', marker_color='purple'), row=2, col=1)
+# fig.add_trace(go.Scatter(x=Simul.index, y=Simul['Qmon'], name='Q UVA (m3/s)', marker_color='navy'), row=2, col=1)
+# fig.update_yaxes(title_text='Chuva [mm]', row=1, col=1)
+# fig.update_yaxes(title_text='Vazão [m3s-1]', row=2, col=1)
+# fig.update_layout(legend_title_text='Comparação Modelo Sacramento')
+# fig.update_layout(autosize=False,width=1000,height=500,margin=dict(l=30,r=30,b=10,t=10))
+# #fig.write_html(f'./param_macs/teste_calib_{bn:02d}_{bnome}_total.html')
+# fig.write_image(f'./param_macs/teste_calib_{bn:02d}_{bnome}_total.png')
+# fig.show()
 
 
 

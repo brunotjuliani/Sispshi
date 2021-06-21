@@ -7,6 +7,7 @@ import dds
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
 
+
 ### DEFINICAO FUNÇÕES OBJETIVO E SIMULAÇÃO
 def fobj_nse(X):
     params = X
