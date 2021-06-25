@@ -36,8 +36,8 @@ def sim(X):
 
 
 ### LEITURA FORÇANTES
-bn = '01'
-bnome = 'Rio_Negro'
+bn = '04'
+bnome = 'Pontilhao'
 area = pd.read_csv(f'./PEQ/{bn}_{bnome}_peq_diario.csv', nrows=1, header=None).values[0][0]
 dt = 24 # 24 horas / 1 dia
 PEQ = pd.read_csv(f'./PEQ/{bn}_{bnome}_peq_diario.csv', skiprows=1,
@@ -47,7 +47,7 @@ PME = PEQ['pme']
 ETP = PEQ['etp']
 Qobs = PEQ['qjus'].rename('qobs')
 idx = PME.index
-idx_cal = idx[idx > '2017-01-01']
+idx_cal = idx[idx > '2016-01-01']
 
 ### PRIMEIRA CALIBRAÇÃO -> NSE P/ TODOS OS PARAMETROS
 Xmin_1 = Xmin.copy()
@@ -79,7 +79,7 @@ df_params['Par_NSE'] = X1
 
 df_params.to_csv(f'./Parametros/param_hymod_{bn}_{bnome}.csv', index=False)
 
-Simul = Simul.loc['2019':]
+Simul = Simul.loc['2018':'2019']
 
 print('Nash H_NSE = ' + str(he.nse(Simul['H_NSE'],Simul['Qobs'])))
 print('Log-Nash H_NSE = ' + str(he.nse(np.log(Simul['H_NSE']),np.log(Simul['Qobs']))))

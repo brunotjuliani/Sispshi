@@ -71,8 +71,8 @@ def sim(X):
 
 
 ### LEITURA FORÇANTES
-bn = '02'
-bnome = 'Porto_Amazonas'
+bn = '04'
+bnome = 'Pontilhao'
 area = pd.read_csv(f'./PEQ/{bn}_{bnome}_peq_diario.csv', nrows=1, header=None).values[0][0]
 dt = 1 # 1 dia
 PEQ = pd.read_csv(f'./PEQ/{bn}_{bnome}_peq_diario.csv', skiprows=1,
@@ -82,7 +82,7 @@ PME = PEQ['pme']
 ETP = PEQ['etp']
 Qobs = PEQ['qjus'].rename('qobs')
 idx = PME.index
-idx_cal = idx[idx > '2014-01-01']
+idx_cal = idx[idx > '2016-01-01']
 Xmin = Xmin[:-3] # desconsidera os parametros de propagacao (Qmon=None)
 Xmax = Xmax[:-3] # desconsidera os parametros de propagacao (Qmon=None)
 
@@ -157,7 +157,7 @@ df_params['Par_NSE'] = np.append(X4,[None, None, None])
 
 df_params.to_csv(f'./Parametros/param_sac_{bn}_{bnome}.csv', index=False)
 
-Simul = Simul.loc['2015':]
+Simul = Simul.loc['2018':'2019']
 
 print('Nash MACS = ' + str(he.nse(Simul['S_MACS'],Simul['Qobs'])))
 print('Log-Nash MACS = ' + str(he.nse(np.log(Simul['S_MACS']),np.log(Simul['Qobs']))))
