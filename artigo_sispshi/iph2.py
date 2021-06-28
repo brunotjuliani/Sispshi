@@ -18,7 +18,36 @@ Xnomes = [i[0] for i in X]
 Xmin = [i[1] for i in X]
 Xmax = [i[2] for i in X]
 
-def IPH2(area, dt, PME, ETP, params, q0=None, Qmon=None):
+def IPH2(area, dt, PME, ETP, params, Qmon=None, q0=None):
+    """ Modelo chuva-vazão IPH2.
+        Modelo de propagação da vazão de montante por cascata de reservatórios conceituais lineares
+
+    Entradas:
+    area = área [km^2] da sub-bacia simulada (incremental);
+    dt = escala de tempo para os dados de entrada (em horas);
+    ETP = lista com os dados de evapotranspiração potencial (= et. de referência) [mm em 1 hora];
+    PME = lista com os dados de chuva média na bacia [mm em 1 hora];
+    params = dicionário com os 9-13 parâmetros dos modelos (9 da fase bacia <+ 2 multip. dos inputs> <+ 2 da propagação>);
+        {"RMAX"} = capacidade máxima do reservatório de interceptação [mm];
+        {"Io"}   = taxa de infiltração máxima do solo [mm/h];
+        {"fIb"}  = fração de Io que corresponde à taxa de infiltração mínima, quando o solo está saturado [fração];
+        {"H"}    = parâmetro que define o formato da curva de infiltração na equação de Horton [adim.];
+        {"alfa"} = fator de correção para precipitação efetiva [adim.]
+        {"Ksup", "Ksub"} = constantes de recessão do escoamento superficial e subterrâneo respectivamente [h];
+        {"Aimp"} = porção de área da bacia que é impermeável  [fração];
+        {"NH"}   = tempo de concentração = número de ordenadas do Hist. Tempo-Área [h];
+        <{"xET0", "xPREC"}> = multiplicadores da evapotranspiração e da chuva média na bacia [adim.];
+        <{"Kprop"}> = taxa de depleção dos reservatórios de propagação [fração/hora];
+        <{"lag"}> = tempo de advecção (deslocamento temporal) da vazão propagada [horas].
+    Qmon = lista com os dados de vazão de montante [m3/s];
+    q0 = vazão observada em t=0. Serve para inicializar os reservatórios do modelo de propagação
+
+    Saída:
+    qcalc = lista com os dados de vazão calculado pelo modelo [m3/s].
+    """
+    from math import log, exp
+    #arq = open("in_python.txt", "w")
+    #P, E, R, S, T, EP, ER, RI, RD = [0.0 for i in range(9)]
 
     if type(params) is np.ndarray:
         params = dict(zip(Xnomes, params))
@@ -39,18 +68,16 @@ def IPH2(area, dt, PME, ETP, params, q0=None, Qmon=None):
     Ib = Io * fIb
     Ks = exp(-1./Ksup)
     Kb = exp(-1./Ksub)
-    ln_H = log(H)
     NH = int(round(NH,0))
-
     #aux = 10*" %12.6f" + "\n"
-    #arq.write(aux % (prm["RMAX"], prm["Io"], prm["Ib"], prm["H"], prm["alfa"], prm["Ks"], prm["Kb"], prm["Aimp"], prm["NH"], ln_H))
+    #arq.write(aux % (prm["RMAX"], prm["Io"], prm["Ib"], prm["H"], prm["alfa"], prm["Ks"], prm["Kb"], prm["Aimp"], prm["NH"], prm["ln(H)"]))
 
     #Constantes do modelo computadas sobre os valores dos parâmetros
-    Smax = -1 * Io / ln_H
-    BI   = Io / ln_H / (Io - Ib)
+    Smax = -1 * Io / log(H)
+    BI   = Io / log(H) / (Io - Ib)
     AI   = -1 * Io * BI
     AT   = 0.0
-    BT   = -1 * Io / Ib / ln_H
+    BT   = -1 * Io / Ib / log(H)
     AIL  = -1 * AI / BI
     BIL  = 1.0 / BI
     ATL  = 0.0
@@ -58,9 +85,10 @@ def IPH2(area, dt, PME, ETP, params, q0=None, Qmon=None):
 
     #Inserindo valores padrão de parâmetros que podem não ser fornecidos
     if "xET0" not in params: xET0 = 1.0
+    if "xPREC" not in params: xPREC = 1.0
 
-    #Fator de conversão de mm/h para m3/s - dt em horas
-    conv = area / 3.6*dt
+    #Fator de conversão de mm/h para m3/s
+    conv = area / (3.6*dt)
 
     #aux = 8*" %12.6f" + "\n"
     #arq.write(aux % (Smax, BI, AI, BT, AIL, BIL, BTL, conv))
@@ -69,29 +97,26 @@ def IPH2(area, dt, PME, ETP, params, q0=None, Qmon=None):
     S  = 0.5 * Smax
     R  = 0.5 * RMAX
     RI = AIL + BIL * S
-    # if Qmon is None:
-    #     Qmon = np.zeros(len(PME))
-    # if q0 == None:
-    #     QT = Qmon[0] / conv
-    # else:
-    #     QT = max(q0 - Qmon[0], 0.0) / conv
-    QT = 0.0
+    if Qmon is None:
+        QT = 0.0
+    else:
+        if q0 is None:
+            QT = Qmon[0] / conv
+        else:
+            QT = max(q0 - Qmon[0], 0.0) / conv
     QS = 0.0
     PV = [0.0 for i in range(NH)]
     HIST = [1./NH for i in range(NH)]    #Bacia retangular pro histograma tempo-área
-
-    lenCMB = len(PME)
-
-    qbac = [None for i in range(lenCMB)]
+    qbac = [None for i in range(len(PME))]
 
     #arq.write(" %12.6f %12.6f %12.6f %12.6f\n" % (S, R, RI, QT))
 
 
     #Iterando o modelo a cada registro da série de dados
-    for i in range(lenCMB):
+    for i in range(len(PME)):
 
-        P = PME[i]
-        E = ETP[i] * xET0
+        P = PME[i] #* prm["xPREC"]
+        E = ETP[i] #* prm["xET0"]
 
         #arq.write("%6i %12.6f %12.6f\n" % (i+1, P, E))
 
@@ -184,7 +209,7 @@ def IPH2(area, dt, PME, ETP, params, q0=None, Qmon=None):
                 RI1 = Ib + (RAUX-Ib) * H**AT1
                 S1  = AI + BI*RI1
                 T   = ATL + BTL*S1
-                VI  = Ib*AT1 + (RAUX-Ib)*(H**AT1 -1.0)/ln_H + VAUX
+                VI  = Ib*AT1 + (RAUX-Ib)*(H**AT1 -1.0)/log(H) + VAUX
                 VE  = P*AT1 - VI + VAUX
 
             #aux = "%6i C" + 8*" %12.6f" + "\n"
@@ -197,7 +222,7 @@ def IPH2(area, dt, PME, ETP, params, q0=None, Qmon=None):
             RI1 = Ib + (RAUX-Ib) * H**AT1
             S1  = AI + BI*RI1
             T   = ATL + BTL*S1
-            VI  = Ib*AT1 + (RAUX-Ib)*(H**AT1 -1.0)/ln_H + VAUX
+            VI  = Ib*AT1 + (RAUX-Ib)*(H**AT1 -1.0)/log(H) + VAUX
             VE  = P*AT1 - VI + VAUX
 
             #aux = "%6i D" + 7*" %12.6f" + "\n"
@@ -234,5 +259,66 @@ def IPH2(area, dt, PME, ETP, params, q0=None, Qmon=None):
         #arq.write("%6i F %12.6f %12.6f %12.6f %12.6f\n" % (i+1, QS, QT, S, RI))
 
         qbac[i] = (QS + QT) * conv
+    #===========================================================================================================================
+    #arq.close()
 
-    return qbac
+
+
+    #PROPAGAÇAO DA VAZÃO DE MONTANTE
+    #===========================================================================================================================
+    if "Kprop" in params:
+
+        #Número de reservatórios da fase canal
+        NRSV = 2
+
+        #Vetor de reservatórios e de volumes de propagação
+        RSV, PROP = [None for i in range(NRSV)], [None for i in range(NRSV)]
+
+        #Vetor de vazão calculada
+        qcalc = []
+
+        #Inicializando reservatórios de propagação
+
+        if q0 is None: q0 = 50.
+
+        for i in range(NRSV):
+            RSV[i] = (q0 * 3600) / params["Kprop"]
+
+        #Executando modelo de propagação por reservatórios conceituais lineares
+        for i in range(len(qbac)):
+
+            RSV[0] = RSV[0] + Qmon[i] * 3600
+            PROP[0] = params["Kprop"] * RSV[0]
+            RSV[0] = RSV[0] - PROP[0]
+
+            for j in range(1, NRSV):
+
+                RSV[j] = RSV[j] + PROP[j-1]
+                PROP[j] = params["Kprop"] * RSV[j]
+                RSV[j] = RSV[j] - PROP[j]
+
+            qcalc.append(PROP[-1] / 3600)
+
+        #Deslocando série em prm["lag"] horas e transformando em m3/s
+        if "lag" in params:
+            params["lag"] = int(round(params["lag"],0))
+
+            for i in range(len(qcalc)-1, -1, -1):
+
+                j = i - params["lag"]
+
+                if j < 0:
+                    qcalc[i] = qcalc[i]
+
+                else:
+                    qcalc[i] = qcalc[j]
+
+        #Acrescentando vazão gerada na fase bacia
+        for i in range(len(qcalc)):
+            qcalc[i] += qbac[i]
+
+        return qcalc
+
+    else:
+        return qbac
+    #===========================================================================================================================
