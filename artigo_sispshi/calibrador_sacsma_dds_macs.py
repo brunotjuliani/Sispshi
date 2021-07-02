@@ -71,8 +71,8 @@ def sim(X):
 
 
 ### LEITURA FORÇANTES
-bn = '05'
-bnome = 'Santa_Cruz_Timbo'
+bn = '13'
+bnome = 'Solais_Novo'
 area = pd.read_csv(f'./PEQ/{bn}_{bnome}_peq_diario.csv', nrows=1, header=None).values[0][0]
 dt = 1 # 1 dia
 PEQ = pd.read_csv(f'./PEQ/{bn}_{bnome}_peq_diario.csv', skiprows=1,
@@ -138,7 +138,7 @@ Simul['S_NSE'] = Qsim_4
 fig = make_subplots(rows=3, cols=1, shared_xaxes=True, specs=[[{'rowspan': 1, 'colspan': 1}],[{'rowspan': 2, 'colspan': 1}],[{'rowspan': 0, 'colspan': 0}]])
 fig.add_trace(go.Scatter(x=Simul.index, y=Simul['PME'], name="PME (mm)"), row=1, col=1)
 fig['layout']['yaxis']['autorange'] = "reversed"
-#fig.add_trace(go.Scatter(x=PEQ.index, y=ETP, name="ETP (mm)"), row=1, col=1)
+#fig.add_trace(go.Scatter(x=PEQ.index, y=ETP, name="ETP (mm)"), row=1, col=1)  
 fig.add_trace(go.Scatter(x=Simul.index, y=Simul['Qobs'], name="Qobs (m3/s)", marker_color='black'), row=2, col=1)
 fig.add_trace(go.Scatter(x=Simul.index, y=Simul['S_MACS'], name='Qsim - MACS', marker_color='green'), row=2, col=1)
 fig.add_trace(go.Scatter(x=Simul.index, y=Simul['S_NSE'], name='Qsim - NSE', marker_color='red'), row=2, col=1)

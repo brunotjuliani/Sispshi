@@ -36,8 +36,8 @@ def sim(X):
 
 
 ### LEITURA FORÇANTES
-bn = '05'
-bnome = 'Santa_Cruz_Timbo'
+bn = '13'
+bnome = 'Solais_Novo'
 area = pd.read_csv(f'./PEQ/{bn}_{bnome}_peq_diario.csv', nrows=1, header=None).values[0][0]
 dt = 24 # 24 horas / 1 dia
 PEQ = pd.read_csv(f'./PEQ/{bn}_{bnome}_peq_diario.csv', skiprows=1,
@@ -47,7 +47,7 @@ PME = PEQ['pme']
 ETP = PEQ['etp']
 Qobs = PEQ['qjus'].rename('qobs')
 idx = PME.index
-idx_cal = idx[idx > '2015-01-01']
+idx_cal = idx[idx > '2017-01-01']
 
 ### PRIMEIRA CALIBRAÇÃO -> NSE P/ TODOS OS PARAMETROS
 Xmin_1 = Xmin.copy()
