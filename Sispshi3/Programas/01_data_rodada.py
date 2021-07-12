@@ -9,7 +9,7 @@ data0 = att_anterior.readline().strip()
 att_anterior.close()
 
 #Rodada Atual
-hora = dt.datetime.utcnow() - dt.timedelta(hours = 1)
+hora = dt.datetime.utcnow() #- dt.timedelta(hours = 1)
 dispara = dt.datetime(hora.year, hora.month, hora.day,  hora.hour,
                       tzinfo=dt.timezone.utc)
 

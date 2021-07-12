@@ -46,7 +46,7 @@ disparo = hora_att.readline().strip()
 hora_att.close()
 
 t_fim = dt.datetime.strptime(disparo, '%Y-%m-%d %H:%M:%S%z')
-t_ini = t_fim - dt.timedelta(days=3)
+t_ini = dt.datetime.strptime(data_ant, '%Y-%m-%d %H:%M:%S%z') - dt.timedelta(days=3)
 
 print('\n#####-----#####-----#####-----#####-----#####-----#####')
 print(f'02 - Coleta de dados de precipitação\n')
@@ -70,14 +70,13 @@ for index, posto in postos_precip.iterrows():
         #Converte indice para formato padrao
         dados.index = pd.to_datetime(dados.index, utc=True).rename('datahora')
         dados["chuva_mm"] = pd.to_numeric(dados["chuva_mm"], downcast = "float")
-    elif posto_banco == 'ana'
+    elif posto_banco == 'ana':
         #Coleta dados de precipitacao do banco ANA
         dados = coleta_ana(posto_codigo, t_ini, t_fim)
         dados = dados[['Chuva']]
         dados.columns = ['chuva_mm']
-        #Localiza dados em BRT e converte para UTC, no formato padrao
-        dados.index = pd.to_datetime(dados.index).tz_localize('America/Sao_Paulo').rename('datahora')
-        dados.index = dados.index.tz_convert('utc')
+        #Localiza dados em BRT(-03:00) e converte para UTC, no formato padrao
+        dados.index = (pd.to_datetime(dados.index) + dt.timedelta(hours=3)).tz_localize('utc')
         dados["chuva_mm"] = pd.to_numeric(dados["chuva_mm"], downcast = "float")
         dados = dados.sort_index()
     else:
@@ -108,13 +107,22 @@ for index, posto in postos_precip.iterrows():
         table_hor['chuva_mm'] = np.nan
     table_hor = table_hor[~table_hor.index.duplicated(keep='first')]
 
-    #exporta dados horarios para csv
+    #EXPORTA SÉRIE HORÁRIA ATUALIZADA
+    #leitura da serie historica
+    serie_hist = pd.read_csv(f'../Dados/Chuva/Estacoes_Operacionais/{idPosto}.csv',
+                              index_col='datahora', parse_dates=True, skiprows=3)
+
+    #atualiza serie historica
+    serie_att = pd.concat([serie_hist,table_hor])
+    serie_att = serie_att[~serie_att.index.duplicated(keep='last')]
+
+    #exporta serie atualizada
     with open(f'../Dados/Chuva/Estacoes_Operacionais/{idPosto}.csv','w',newline='') as file:
         writer = csv.writer(file)
         writer.writerow([posto_snirh])
         writer.writerow([posto_nome])
         writer.writerow([posto_x, posto_y, posto_z])
-    table_hor.to_csv(f'../Dados/Chuva/Estacoes_Operacionais/{idPosto}.csv',
+    serie_att.to_csv(f'../Dados/Chuva/Estacoes_Operacionais/{idPosto}.csv',
                      mode = 'a', sep = ",", float_format='%.2f')
 
     #Estacoes com falha nos dados

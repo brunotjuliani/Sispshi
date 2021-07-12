@@ -6,11 +6,17 @@ print('\n#####-----#####-----#####-----#####-----#####-----#####')
 print(f'03 - Espacialização dos dados de precipitação\n')
 
 # Definicoes inicias
-dmax = 60
+dmax = 50
 grade_def = pd.read_csv('../Dados/grade_def.csv', index_col='idGrade')
 postos_def = pd.read_csv('../Dados/postos_def.csv', index_col='idPosto')
 # matriz de distancias ponto de grade - posto pluviometrico
 D = pd.read_csv('../Dados/matriz_distancias.csv', index_col='idGrade')
+
+hora_att = open('../Dados/disparo.txt')
+data_ant = hora_att.readline().strip()
+disparo = hora_att.readline().strip()
+hora_att.close()
+d_ini = datetime.strptime(data_ant, '%Y-%m-%d %H:%M:%S%z') - timedelta(days=3)
 
 # Coleta as series de chuva dos postos
 chuva_postos = pd.DataFrame()
@@ -18,6 +24,7 @@ for idPosto in postos_def.index:
     chuva_posto = pd.read_csv(f'../Dados/Chuva/Estacoes_Operacionais/{idPosto}.csv',
                               index_col='datahora', parse_dates=True,
                               squeeze=True, skiprows=3).rename(f'{idPosto}')
+    chuva_posto = chuva_posto.loc[d_ini:]
     chuva_postos = pd.concat([chuva_postos, chuva_posto], axis=1)
 
 # Metodo Matricial
@@ -55,9 +62,9 @@ chuva_hist.columns = chuva_hist.columns.astype(int)
 chuva_att = pd.concat([chuva_hist,chuva_grade])
 chuva_att = chuva_att[~chuva_att.index.duplicated(keep='last')]
 
-#Recorta apenas para período de aquecimento
-inicio = chuva_att.index[-1] - timedelta(days=700)
-chuva_att = chuva_att.loc[inicio:]
+# #Recorta apenas para período de aquecimento
+# inicio = chuva_att.index[-1] - timedelta(days=700)
+# chuva_att = chuva_att.loc[inicio:]
 # Salva a chuva interpolada nos pontos de grade
 chuva_att.to_csv('../Dados/Chuva/chuva_grade.csv', index_label='datahora',
                  na_rep='NA')
