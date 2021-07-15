@@ -34,7 +34,7 @@ n = len(grade_def)
 for row in chuva_postos.itertuples():
     t = row[0]
     chuva_postos_t = np.asarray(row[1:])
-    print(datetime.now(), f'- Interpolando {t}')
+    #print(datetime.now(), f'- Interpolando {t}')
 
     # Calcula a matriz de pesos W no tempo t com base nas premissas de distancia e disponibilidade
     chuva_postos_t = np.tile(chuva_postos_t, (n, 1))

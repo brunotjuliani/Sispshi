@@ -142,3 +142,10 @@ df2
 df2['codigo_snirh'] = pd.to_numeric(df2['codigo_snirh'], downcast='integer')
 df2['codigo_snirh']
 df2.to_csv('../Dados/postos_def.csv', index=False)
+
+datas = pd.read_csv('../Dados/inicio_serie_postos.csv', parse_dates=True)
+
+datas['inicio_serie'] = pd.to_datetime(datas['inicio_serie'])
+datas
+
+len(datas.loc[datas['inicio_serie']<='2021'])
