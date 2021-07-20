@@ -41,8 +41,8 @@ def coleta_uhes(t_ini,t_fim,posto_codigo):
             df2.loc[row[0],'Qaflu'] = np.nan
     return df2
 
-postos_flu = pd.read_csv('../Dados/postos_flu.csv')
-postos_flu = postos_flu.loc[postos_flu['tipo']=='uhe']
+postos_flu = pd.read_csv('../Dados/bacias_def.csv')
+
 #define manualmente início da serie a ser coletada
 t_ini = dt.datetime(1997,1,1)
 t_fim = dt.datetime.now()
@@ -52,7 +52,7 @@ print(f'02 - Coleta de dados de vazão\n')
 
 for index, posto in postos_flu.iterrows():
     ## COLETA DADOS PRECIPITACAO
-    idPosto = posto['idPosto']
+    idPosto = posto['idBacia']
     posto_codigo = posto['codigo_banco']
     posto_bacia = posto['bacia']
     posto_nome = posto['nome']

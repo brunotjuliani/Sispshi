@@ -5,6 +5,7 @@ import csv
 import psycopg2, psycopg2.extras
 import requests
 import xmltodict
+import time
 
 def coleta_simepar(t_ini,t_fim,posto_codigo,sensores):
         # Montagem do texto
@@ -33,10 +34,15 @@ def coleta_ana(codEstacao, dataInicio, dataFim):
     response = requests.get(url, params=params)
     decoded = response.content.decode('utf-8')
     dados_dicio = xmltodict.parse(decoded)
-    dados_lista = dados_dicio['DataTable']['diffgr:diffgram']['DocumentElement']['DadosHidrometereologicos']
-    df = pd.DataFrame(dados_lista)
-    df.set_index('DataHora', inplace=True)
+    try:
+        dados_lista = dados_dicio['DataTable']['diffgr:diffgram']['DocumentElement']['DadosHidrometereologicos']
+        df = pd.DataFrame(dados_lista)
+        df.set_index('DataHora', inplace=True)
+    except:
+        df = pd.DataFrame(columns=['Chuva','DataHora'])
     return df
+
+start1 = time.time()
 
 postos_precip = pd.read_csv('../Dados/postos_def.csv')
 
@@ -106,6 +112,15 @@ for index, posto in postos_precip.iterrows():
     except:
         table_hor['chuva_mm'] = np.nan
     table_hor = table_hor[~table_hor.index.duplicated(keep='first')]
+    #exporta serie da rodada
+    with open(f'../Dados/Chuva/Dados_Rodada/{idPosto}_rodada.csv','w',newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow([posto_snirh])
+        writer.writerow([posto_nome])
+        writer.writerow([posto_x, posto_y, posto_z])
+    table_hor.to_csv(f'../Dados/Chuva/Dados_Rodada/{idPosto}_rodada.csv',
+                     mode = 'a', sep = ",", float_format='%.2f')
+
 
     #EXPORTA SÉRIE HORÁRIA ATUALIZADA
     #leitura da serie historica
@@ -136,3 +151,6 @@ for index, posto in postos_precip.iterrows():
 
 print(f'\nColeta finalizada')
 print('#####-----#####-----#####-----#####-----#####-----#####\n')
+
+end1 = time.time()
+print('Tempo decorrido ', end1-start1)

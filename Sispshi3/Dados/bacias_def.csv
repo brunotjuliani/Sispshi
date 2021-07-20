@@ -13,7 +13,7 @@ idBacia,bacia,nome,tipo,codigo_banco,area_incremental
 12_Foz_do_Areia,12,'Foz do Areia',uhe,1,3954
 13_Solais_Novo,13,'Solais Novo',estacao,26055155,1654
 14_Porto_Santo_Antonio,14,'Porto Santo Antonio',estacao,25235306,1083
-15_Aguas_do_Vere,15,'Aguas do Vere',estacao,25465256,6694,
+15_Aguas_do_Vere,15,'Aguas do Vere',estacao,25465256,6694
 16_Segredo,16,'Segredo',uhe,24,2578
 17_Foz_do_Chopim,17,'Foz do Chopim',uhe,6,771
 18_Santa_Clara,18,'Santa Clara',uhe,31,3910

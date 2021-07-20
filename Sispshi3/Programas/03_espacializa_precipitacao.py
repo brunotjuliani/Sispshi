@@ -1,9 +1,13 @@
 from datetime import datetime, timedelta
 import pandas as pd
 import numpy as np
+import time
 
 print('\n#####-----#####-----#####-----#####-----#####-----#####')
 print(f'03 - Espacialização dos dados de precipitação\n')
+
+
+start1 = time.time()
 
 # Definicoes inicias
 dmax = 50
@@ -61,26 +65,18 @@ chuva_hist.columns = chuva_hist.columns.astype(int)
 #Atualiza serie da grade
 chuva_att = pd.concat([chuva_hist,chuva_grade])
 chuva_att = chuva_att[~chuva_att.index.duplicated(keep='last')]
-
-# #Recorta apenas para período de aquecimento
-# inicio = chuva_att.index[-1] - timedelta(days=700)
-# chuva_att = chuva_att.loc[inicio:]
-# Salva a chuva interpolada nos pontos de grade
 chuva_att.to_csv('../Dados/Chuva/chuva_grade.csv', index_label='datahora',
                  na_rep='NA')
 
-print(f'\nEspacialização para grade finalizada')
-print(f'Calculando chuva média por sub-bacia\n')
-#Define numero de bacias do Sispshi (range até n+1)
-b_sispshi = list(range(1,22))
-for bacia in b_sispshi:
-    #selecao dos pontos da grade por bacia
-    selecao = chuva_att[list(grade_def.loc[grade_def['bacia'] == bacia].index)]
-    chuva_sub = pd.DataFrame(selecao.mean(axis=1), columns=['chuva_mm'])
-    #exporta chuva media por bacia
-    chuva_sub.to_csv(f'../Dados/Chuva/chuva_b{bacia}.csv', index_label='datahora',
-                     na_rep='NA')
-    print(f'Chuva média na Bacia {bacia} calculada')
+#Recorta apenas para período de aquecimento
+inicio = chuva_att.index[-1] - timedelta(days=730)
+chuva_aquecimento = chuva_att.loc[inicio:]
+#Salva a interpolacao para periodo da rodada
+chuva_aquecimento.to_csv('../Dados/Chuva/chuva_grade_730.csv',
+                         index_label='datahora', na_rep='NA')
 
 print('\nEspacialização da chuva finalizada')
 print('#####-----#####-----#####-----#####-----#####-----#####\n')
+
+end1 = time.time()
+print('Tempo decorrido ', end1-start1)
