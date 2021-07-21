@@ -5,6 +5,7 @@ import csv
 import psycopg2, psycopg2.extras
 import requests
 import xmltodict
+import time
 
 def coleta_simepar(t_ini,t_fim,posto_codigo,sensores):
         # Montagem do texto
@@ -41,6 +42,10 @@ def coleta_uhes(t_ini,t_fim,posto_codigo):
             df2.loc[row[0],'Qaflu'] = np.nan
     return df2
 
+print('\n#####-----#####-----#####-----#####-----#####-----#####')
+print(f'04 - Coleta de dados de vazão\n')
+start1 = time.time()
+
 bacias_def = pd.read_csv('../Dados/bacias_def.csv')
 
 hora_att = open('../Dados/disparo.txt')
@@ -50,9 +55,6 @@ hora_att.close()
 
 t_fim = dt.datetime.strptime(disparo, '%Y-%m-%d %H:%M:%S%z')
 t_ini = dt.datetime.strptime(data_ant, '%Y-%m-%d %H:%M:%S%z') - dt.timedelta(days=3)
-
-print('\n#####-----#####-----#####-----#####-----#####-----#####')
-print(f'02 - Coleta de dados de vazão\n')
 
 for index, posto in bacias_def.iterrows():
     ## COLETA DADOS PRECIPITACAO
@@ -127,3 +129,5 @@ for index, posto in bacias_def.iterrows():
 
 print(f'\nColeta finalizada')
 print('#####-----#####-----#####-----#####-----#####-----#####\n')
+end1 = time.time()
+print('Tempo decorrido ', end1-start1)
