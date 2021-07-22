@@ -1,8 +1,9 @@
 import pandas as pd
 import numpy as np
 import datetime as dt
-import pygrib
+import xarray as xr
 from pathlib import Path
+import os
 import time
 
 print('\n#####-----#####-----#####-----#####-----#####-----#####')
@@ -28,47 +29,56 @@ bacias_def = pd.read_csv('../Dados/bacias_def.csv')
 #Definicao da grade padrao
 grade_def = pd.read_csv('../Dados/grade_def.csv', index_col='idGrade')
 
+#Leitura arquivo grib recortado
+#Caso arquivo ainda nao gerado para rodada, gera arquivo e copia para pasta
 print('Leitura gribfile')
-grbfile = '../Dados/recorte_D1E.grb'
-grbs = pygrib.open(grbfile)
+try:
+    with xr.open_dataset(f'../Dados/Chuva/Grib/recorte_D1E_{ano:04d}{mes:02d}{dia:02d}00.grb', engine='cfgrib') as ds:
+        grbs = ds.to_dataframe()
+    print('Arquivo carregado\n')
+except:
+    print('Recortando arquivo para área de interesse\n')
+    os.system('rm ../Dados/Chuva/Grib/*.grb')
+    os.system('/usr/local/bin/recortaInterpolaGribEcmwf.sh')
+    os.system(f'mv recorte_D1E_{ano:04d}{mes:02d}{dia:02d}00.grb ../Dados/Chuva/Grib/')
+    with xr.open_dataset(f'../Dados/Chuva/Grib/recorte_D1E_{ano:04d}{mes:02d}{dia:02d}00.grb', engine='cfgrib') as ds:
+        grbs = ds.to_dataframe()
+    print('\nArquivo recortado e carregado\n')
+
+
+#Lista membro ensemble
+membros = grbs.index.unique('number')
+#Lista passos de tempo
+steps = grbs.index.unique('step')
 
 #Dicionarios para dataframes de previsoes por membro
 prev_membros = {}
 prev_disc = {}
 
-ens_n = 0
-while ens_n <= 50:
+for ens_n in membros:
     print('Espacializando membro ', ens_n)
-    #seleciona todos os dados para determinado membro
-    membro = grbs.select(perturbationNumber = ens_n)
     #inicializa dataframe unico para membro
     prev_membros[ens_n] = pd.DataFrame()
-    #loop temporal p/ cada membro
-    for previsao in membro:
-        passo_tempo = data_ecmwf + dt.timedelta(hours=previsao.step)
-        #retorna lista (todos os pontos) na respectiva ordem: lat,lon,p_acumulada
-        valores = previsao.latLonValues
-        lista = [valores[i * 3:(i + 1) * 3] for i in range((len(valores) + 3 - 1) // 3 )]
-        df = pd.DataFrame(lista, columns=['y', 'x', 'value'])
+    for passo in steps:
+        idx_hora = data_ecmwf + passo
+        #filtra dados para membro e tempo
+        membro = grbs.loc[:,:,ens_n,passo].reset_index(level=['latitude','longitude'])
         #transforma lon para padrao, e arredonda p/ correlacao
-        df['x'] = df['x'] - 360
-        df['x'] = df['x'].apply(lambda x: round(x,1))
-        df['y'] = df['y'].apply(lambda x: round(x,1))
+        membro['x'] = (membro['longitude'] - 360).apply(lambda x: round(x,1))
+        membro['y'] = membro['latitude'].apply(lambda x: round(x,1))
         #correlaciona com grade padrao das sub-bacias Sispshi
-        prev_sispshi = pd.merge(df, grade_def, on=['x', 'y'])
+        prev_sispshi = pd.merge(membro, grade_def, on=['x', 'y'])
         #precipitacao media em cada bacia
         for idx, info in bacias_def.iterrows():
             bacia = info['bacia']
-            prev_bacia = prev_sispshi.loc[prev_sispshi['bacia']==bacia]['value'].mean()
+            prev_bacia = prev_sispshi.loc[prev_sispshi['bacia']==bacia]['unknown'].mean()
             #armazena p/ passo de tempo e bacia
-            prev_membros[ens_n].loc[passo_tempo,bacia] = prev_bacia
+            prev_membros[ens_n].loc[idx_hora,bacia] = prev_bacia
     #diferenciacao para cada passo de tempo isolado, comparacao do acumulado
     #exclui primeira linha - condicoes iniciais
     prev_disc[ens_n] = prev_membros[ens_n].diff().iloc[1:]
     #limpa casos de diff negativa - valores muito pequenos - erro do grib
     prev_disc[ens_n] = prev_disc[ens_n].clip(lower=0)
-    #passa para proximo membro
-    ens_n +=1
 
 print('\n#####-----#####-----#####-----#####-----#####-----#####')
 print(f'05.2 - Dados de Entrada para previsão hidrológica\n')
