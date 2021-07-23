@@ -5,6 +5,9 @@ import xarray as xr
 from pathlib import Path
 import os
 import time
+import warnings
+#ignora warnings de slice dos dataframe por membro e passo de tempo
+warnings.simplefilter(action='ignore', category=pd.errors.PerformanceWarning)
 
 print('\n#####-----#####-----#####-----#####-----#####-----#####')
 print(f'05.1 - Previsão ECMWF\n')
@@ -15,8 +18,12 @@ hora_att = open('../Dados/disparo.txt')
 data_ant = hora_att.readline().strip()
 disparo = hora_att.readline().strip()
 hora_att.close()
+#datetime rodada
 rodada = dt.datetime.strptime(disparo, '%Y-%m-%d %H:%M:%S%z')
 ano, mes, dia, hora = rodada.year, rodada.month, rodada.day, rodada.hour
+#datetime rodada anterior
+anterior = dt.datetime.strptime(data_ant, '%Y-%m-%d %H:%M:%S%z')
+mes_ant, dia_ant = anterior.month, anterior.day
 #hora arquivo ecmwf
 data_ecmwf = dt.datetime(ano, mes, dia, 00, tzinfo=dt.timezone.utc)
 #inicio aquecimento
@@ -29,22 +36,37 @@ bacias_def = pd.read_csv('../Dados/bacias_def.csv')
 #Definicao da grade padrao
 grade_def = pd.read_csv('../Dados/grade_def.csv', index_col='idGrade')
 
-#Leitura arquivo grib recortado
-#Caso arquivo ainda nao gerado para rodada, gera arquivo e copia para pasta
-print('Leitura gribfile')
-try:
+#Leitura arquivo grib recortado quando já gerado
+#Para novo dia, gera arquivo e copia para pasta
+if mes_ant == mes and dia_ant == dia:
+    print('Gribfile já recortado\n')
+    #grib para dataframe
     with xr.open_dataset(f'../Dados/Chuva/Grib/recorte_D1E_{ano:04d}{mes:02d}{dia:02d}00.grb', engine='cfgrib') as ds:
         grbs = ds.to_dataframe()
     print('Arquivo carregado\n')
-except:
+else:
     print('Recortando arquivo para área de interesse\n')
-    os.system('rm ../Dados/Chuva/Grib/*.grb')
+    #muda diretorio para salvar grib, e volta para /Programas
+    dir_prog = os.getcwd()
+    os.chdir('../Dados/Chuva/Grib/')
     os.system('/usr/local/bin/recortaInterpolaGribEcmwf.sh')
-    os.system(f'mv recorte_D1E_{ano:04d}{mes:02d}{dia:02d}00.grb ../Dados/Chuva/Grib/')
+    os.system('rm *.idx')
+    os.chdir(dir_prog)
+    #grib para dataframe
     with xr.open_dataset(f'../Dados/Chuva/Grib/recorte_D1E_{ano:04d}{mes:02d}{dia:02d}00.grb', engine='cfgrib') as ds:
         grbs = ds.to_dataframe()
     print('\nArquivo recortado e carregado\n')
 
+# with xr.open_dataset(f'../Dados/Chuva/Grib/recorte_D1E_{ano:04d}{mes:02d}{dia:02d}00.grb', engine='cfgrib') as ds:
+#     grbs = ds.to_dataframe()
+
+#Trata dataframe do grib
+print('Tratando dataframe de previsão\n')
+grbs = grbs.iloc[:,-1].rename('chuva_acum').reset_index(level=['latitude','longitude'])
+#transforma lon para padrao, e arredonda p/ correlacao
+grbs['x'] = (grbs['longitude'] - 360).apply(lambda x: round(x,1))
+grbs['y'] = grbs['latitude'].apply(lambda x: round(x,1))
+grbs = grbs.drop(['latitude', 'longitude'], axis=1)
 
 #Lista membro ensemble
 membros = grbs.index.unique('number')
@@ -62,16 +84,13 @@ for ens_n in membros:
     for passo in steps:
         idx_hora = data_ecmwf + passo
         #filtra dados para membro e tempo
-        membro = grbs.loc[:,:,ens_n,passo].reset_index(level=['latitude','longitude'])
-        #transforma lon para padrao, e arredonda p/ correlacao
-        membro['x'] = (membro['longitude'] - 360).apply(lambda x: round(x,1))
-        membro['y'] = membro['latitude'].apply(lambda x: round(x,1))
+        membro = grbs.loc[ens_n,passo]
         #correlaciona com grade padrao das sub-bacias Sispshi
         prev_sispshi = pd.merge(membro, grade_def, on=['x', 'y'])
         #precipitacao media em cada bacia
         for idx, info in bacias_def.iterrows():
             bacia = info['bacia']
-            prev_bacia = prev_sispshi.loc[prev_sispshi['bacia']==bacia]['unknown'].mean()
+            prev_bacia = prev_sispshi.loc[prev_sispshi['bacia']==bacia]['chuva_acum'].mean()
             #armazena p/ passo de tempo e bacia
             prev_membros[ens_n].loc[idx_hora,bacia] = prev_bacia
     #diferenciacao para cada passo de tempo isolado, comparacao do acumulado
@@ -113,6 +132,8 @@ for idx, info in bacias_def.iterrows():
     while ens_n <= 50:
         chuva_membro = pd.DataFrame(prev_disc[ens_n][bacia].rename('chuva_mm'))
         chuva_comb = pd.concat([chuva_sub, chuva_membro])
+        #para index duplicado, fica com dado observado
+        chuva_comb = chuva_comb[~chuva_comb.index.duplicated(keep='first')]
         dados_peq['pme_'+str(ens_n)] = chuva_comb['chuva_mm']
         ens_n +=1
 
