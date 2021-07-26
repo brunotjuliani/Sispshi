@@ -6,6 +6,8 @@ from pathlib import Path
 import os
 import time
 import warnings
+import sacsma2021
+
 #ignora warnings de slice dos dataframe por membro e passo de tempo
 warnings.simplefilter(action='ignore', category=pd.errors.PerformanceWarning)
 
@@ -176,7 +178,96 @@ for idx, info in bacias_def.iterrows():
                     index_label='datahora', float_format='%.3f')
 
 print('\nPreparo de dados finalizado')
-print('#####-----#####-----#####-----#####-----#####-----#####\n')
 
+print('\n#####-----#####-----#####-----#####-----#####-----#####')
+print(f'05.3 - Simulação Sacramento\n')
+parametros = pd.read_csv('../Dados/param_dt6.csv', index_col='Parametros')
+simulacao = {}
+for idx, info in bacias_def.iterrows():
+    bacia = info['bacia']
+    area_inc = info['area_incremental']
+    montante = info['b_montante']
+
+    #Para bacias de cabeceira
+    if montante == 'n':
+        print(f'\nIniciando bacia {bacia:02d}')
+        #Dados para simulacao
+        dt = 0.25 #6 horas
+        params = parametros[f'par_{bacia:02d}']
+        ETP = aq_bacias[bacia]['etp']
+        Qobs = aq_bacias[bacia]['q_m3s'].rename('qobs')
+        q_atual_obs = Qobs.loc[Qobs.last_valid_index()]
+        dados_precip = aq_bacias[bacia].drop(['etp', 'q_m3s'], axis=1)
+
+        #Simulacao para verificar ancoragem
+        Qsims = pd.DataFrame()
+        PME = dados_precip['pme_0']
+        Qsims['sac_0'] = sacsma2021.simulacao(area_inc, dt, PME, ETP, params)
+        Qsims.index = dados_precip.index
+        #Recorta para periodo de previsao
+        Qsims = Qsims.loc[rodada:]
+        #Taxa Proporcao
+        q_atual_sim = Qsims.loc[rodada,'sac_0']
+        dif_sim = (q_atual_obs - q_atual_sim)/q_atual_obs
+        #Se simulado for menor que observado, modifica estados iniciais de chuva
+        #Apos ajustar chuva p/ simulação com diferença < 5%, faz proporcionalidade
+        #Se simulado for maior que observado, faz apenas proprocionalidade
+        dados_perturb = dados_precip.copy()
+        if dif_sim > 0:
+            #print(f'Modificando chuva aquecimento - b{bacia:02d}')
+            inc_0 = 0
+            taxa = 1
+            incremento = inc_0
+            while abs(dif_sim) > 0.05:
+                incremento = inc_0 + taxa
+                print('Tentativa - incremento = ', str(incremento))
+                dados_perturb = dados_precip.copy()
+                dados_perturb.loc[:rodada] += incremento
+                Qsims = pd.DataFrame()
+                #Simula perturbacao
+                PME = dados_perturb['pme_0']
+                Qsims['sac_0'] = sacsma2021.simulacao(area_inc, dt, PME, ETP, params)
+                Qsims.index = dados_perturb.index
+                Qsims = Qsims.loc[rodada:]
+                #Taxa Proporcao
+                q_atual_sim = Qsims.loc[rodada,'sac_0']
+                dif_sim = (q_atual_obs - q_atual_sim)/q_atual_obs
+                #Se simulado for maior que observado, reduz taxa de incremento
+                #Se simulado for menor que observado, adciona-se a taxa ao incremento base
+                if dif_sim < 0:
+                    taxa = taxa/2
+                else:
+                    inc_0 = incremento
+            print(f'Chuva incremental bacia {bacia:02d}: {incremento} mm')
+
+        ##SIMULACAO SACRAMENTO com proporcionalidade para os membros
+        Qsims = pd.DataFrame()
+        #Simula para ensemble e faz quantis
+        ens_n = 0
+        while ens_n <= 50:
+            PME = dados_perturb[f'pme_{ens_n}']
+            Qsims[f'sac_{ens_n}'] = sacsma2021.simulacao(area_inc, dt, PME, ETP, params)
+            ens_n += 1
+        Qsims.index = dados_precip.index
+        #Armazena no dicionario para aproveitamento de montante
+        simulacao[bacia] = Qsims
+        #Recorta para periodo de previsao
+        Qsims = Qsims.loc[rodada:]
+        #Ancora com proporcionalidade
+        q_atual_sim = Qsims.loc[rodada,'sac_0']
+        Qsims = Qsims * q_atual_obs/q_atual_sim
+        #Calculo dos quantis
+        Qsims['Qmed'] = Qsims.median(axis=1)
+        Qsims['Q25'] = Qsims.quantile(0.25, axis=1)
+        Qsims['Q75'] = Qsims.quantile(0.75, axis=1)
+        Qsims['Qmax'] = Qsims.max(axis=1)
+        Qsims['Qmin'] = Qsims.min(axis=1)
+
+        #Exporta serie ancorada
+        Qsims.to_csv(f'../Simulacoes/{ano:04d}_{mes:02d}_{dia:02d}_{hora:02d}/sim_b{bacia:02d}_{ano:04d}{mes:02d}{dia:02d}{hora:02d}.csv',
+                        index_label='datahora', float_format='%.3f')
+
+print('\nSimulação finalizada')
+print('#####-----#####-----#####-----#####-----#####-----#####\n')
 end1 = time.time()
 print('Tempo decorrido ', end1-start1)
