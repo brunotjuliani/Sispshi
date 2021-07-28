@@ -51,8 +51,8 @@ else:
     #muda diretorio para salvar grib, e volta para /Programas
     dir_prog = os.getcwd()
     os.chdir('../Dados/Chuva/Grib/')
-    os.system('/usr/local/bin/recortaInterpolaGribEcmwf.sh')
     os.system('rm *')
+    os.system('/usr/local/bin/recortaInterpolaGribEcmwf.sh')
     os.chdir(dir_prog)
     #grib para dataframe
     with xr.open_dataset(f'../Dados/Chuva/Grib/recorte_D1E_{ano:04d}{mes:02d}{dia:02d}00.grb', engine='cfgrib') as ds:
@@ -181,9 +181,57 @@ for idx, info in bacias_def.iterrows():
 print('\nPreparo de dados finalizado')
 
 print('\n#####-----#####-----#####-----#####-----#####-----#####')
-print(f'05.3 - Simulação Sacramento\n')
+print(f'05.3 - Simulação Sacramento sem ancoragem\n')
 parametros = pd.read_csv('../Dados/param_dt6.csv', index_col='Parametros')
-simulacao = {}
+simulado = {}
+for idx, info in bacias_def.iterrows():
+    bacia = info['bacia']
+    area_inc = info['area_incremental']
+    montante = info['b_montante']
+
+    #Para bacias de cabeceira
+    if montante == 'n':
+        print(f'Iniciando bacia {bacia:02d}')
+        #Dados para simulacao
+        dt = 0.25 #6 horas
+        params = parametros[f'par_{bacia:02d}']
+        ETP = aq_bacias[bacia]['etp']
+        Qobs = aq_bacias[bacia]['q_m3s'].rename('qobs')
+        q_atual_obs = Qobs.loc[Qobs.last_valid_index()]
+        #Caso nao tenha dado observado mais recente, compara com ultima hora de dado
+        idx_obs_atual = Qobs.last_valid_index()
+        dados_precip = aq_bacias[bacia].drop(['etp', 'q_m3s'], axis=1)
+
+        ##SIMULACAO SACRAMENTO sem ancoragem
+        Qsims = pd.DataFrame()
+        #Simula para ensemble e faz quantis
+        ens_n = 0
+        while ens_n <= 50:
+            PME = dados_precip[f'pme_{ens_n}']
+            Qsims[f'sac_{ens_n}'] = sacsma2021.simulacao(area_inc, dt, PME, ETP, params)
+            ens_n += 1
+        Qsims.index = dados_precip.index
+        #Armazena no dicionario para aproveitamento de montante
+        simulado[bacia] = Qsims
+        q_atual_sim = Qsims.loc[idx_obs_atual,'sac_0']
+        # #Recorta para periodo de previsao
+        # Qsims = Qsims.loc[rodada:]
+        #Deixa serie completa de simulacao para comparar ancoragem
+        #Calculo dos quantis
+        Qsims['Qmed'] = Qsims.median(axis=1)
+        Qsims['Q25'] = Qsims.quantile(0.25, axis=1)
+        Qsims['Q75'] = Qsims.quantile(0.75, axis=1)
+        Qsims['Qmax'] = Qsims.max(axis=1)
+        Qsims['Qmin'] = Qsims.min(axis=1)
+
+        #Exporta serie sem ancoragem
+        Qsims.to_csv(f'../Simulacoes/{ano:04d}_{mes:02d}_{dia:02d}_{hora:02d}/sim_bru_b{bacia:02d}_{ano:04d}{mes:02d}{dia:02d}{hora:02d}.csv',
+                        index_label='datahora', float_format='%.3f')
+
+print('\n#####-----#####-----#####-----#####-----#####-----#####')
+print(f'05.4 - Simulação Sacramento com ancoragem\n')
+parametros = pd.read_csv('../Dados/param_dt6.csv', index_col='Parametros')
+ancorado = {}
 for idx, info in bacias_def.iterrows():
     bacia = info['bacia']
     area_inc = info['area_incremental']
@@ -252,13 +300,14 @@ for idx, info in bacias_def.iterrows():
             ens_n += 1
         Qsims.index = dados_precip.index
         #Armazena no dicionario para aproveitamento de montante
-        simulacao[bacia] = Qsims
+        ancorado[bacia] = Qsims
         #Ancora com proporcionalidade
         print(f'Proporcionalizando vazao simulada')
         q_atual_sim = Qsims.loc[idx_obs_atual,'sac_0']
         Qsims = Qsims * q_atual_obs/q_atual_sim
         #Recorta para periodo de previsao
-        Qsims = Qsims.loc[rodada:]
+        #Pega ultimo index com dado observado como inicio
+        Qsims = Qsims.iloc[Qsims.index.get_loc(rodada, method='pad'):]
         #Calculo dos quantis
         Qsims['Qmed'] = Qsims.median(axis=1)
         Qsims['Q25'] = Qsims.quantile(0.25, axis=1)
@@ -267,7 +316,7 @@ for idx, info in bacias_def.iterrows():
         Qsims['Qmin'] = Qsims.min(axis=1)
 
         #Exporta serie ancorada
-        Qsims.to_csv(f'../Simulacoes/{ano:04d}_{mes:02d}_{dia:02d}_{hora:02d}/sim_b{bacia:02d}_{ano:04d}{mes:02d}{dia:02d}{hora:02d}.csv',
+        Qsims.to_csv(f'../Simulacoes/{ano:04d}_{mes:02d}_{dia:02d}_{hora:02d}/sim_anc_b{bacia:02d}_{ano:04d}{mes:02d}{dia:02d}{hora:02d}.csv',
                         index_label='datahora', float_format='%.3f')
 
 print('\nSimulação finalizada')
