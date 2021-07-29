@@ -307,7 +307,7 @@ for idx, info in bacias_def.iterrows():
         Qsims = Qsims * q_atual_obs/q_atual_sim
         #Recorta para periodo de previsao
         #Pega ultimo index com dado observado como inicio
-        Qsims = Qsims.iloc[Qsims.index.get_loc(rodada, method='pad'):]
+        Qsims = Qsims.loc[rodada:]
         #Calculo dos quantis
         Qsims['Qmed'] = Qsims.median(axis=1)
         Qsims['Q25'] = Qsims.quantile(0.25, axis=1)

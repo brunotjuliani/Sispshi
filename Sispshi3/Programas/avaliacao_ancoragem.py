@@ -50,10 +50,12 @@ for idx, info in bacias_def.iterrows():
 
         # Plotagem
         fig = go.Figure()
-        fig.add_trace(go.Scatter(x=vazao_obs.index, y=vazao_obs['q_m3s'], name=f"Q observada (m3/s)", marker_color='black'))
+        fig.add_trace(go.Scatter(x=dados_anc.index, y=dados_anc['Q75'], showlegend=False, marker_color='blue'))
+        fig.add_trace(go.Scatter(x=dados_anc.index, y=dados_anc['Q25'], showlegend=False, marker_color='blue', fill='tonexty'))
         fig.add_trace(go.Scatter(x=dados_anc.index, y=dados_anc['Qmed'], name=f"Simulação - ancorada (m3/s)", marker_color='blue'))
         fig.add_trace(go.Scatter(x=dados_bru.index, y=dados_bru['Qmed'], name=f"Simulação - bruta (m3/s)", marker_color='green'))
         fig.add_trace(go.Scatter(x=operacional.index, y=operacional['vazao'], name=f"Simulação - operacional (m3/s)", marker_color='red'))
+        fig.add_trace(go.Scatter(x=vazao_obs.index, y=vazao_obs['q_m3s'], name=f"Q observada (m3/s)", marker_color='black'))
         #fig.add_trace(go.Scatter(x=[rodada], y=[q_atual_obs], marker=dict(color="gold", size=10), name='Disparo Previsão'))
 
         fig.update_yaxes(title_text='Vazão [m3s-1]')
