@@ -4,7 +4,7 @@ from plotly.subplots import make_subplots
 import plotly.graph_objects as go
 
 # Leitura
-rodada = dt.datetime(2021, 7, 28, 13, tzinfo=dt.timezone.utc)
+rodada = dt.datetime(2021, 7, 29, 13, tzinfo=dt.timezone.utc)
 ini_obs = rodada-dt.timedelta(days=10)
 ini_obs = ini_obs.isoformat()
 fim_prev = rodada+dt.timedelta(days=14)
