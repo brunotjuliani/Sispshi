@@ -58,8 +58,7 @@ def simulacao(area, dt, PME, ETP, params, Qmon=None):
     KUH   = params['KUH']   # dias / par de escala da pdf Gama
     if Qmon is not None:
         # Parametros Muskingum
-        NMSK = params['NMSK'] # inteiro
-        KMSK = params['KMSK'] # dias
+        KMSK = params['KMSK'] # horas
         XMSK = params['XMSK'] # adimensional
 
     # Calcula as ordenadas do HU

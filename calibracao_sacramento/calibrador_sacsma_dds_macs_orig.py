@@ -1,8 +1,8 @@
 import pandas as pd
 import numpy as np
 import math
-import sacsma2021_antigo as sacsma2021
-from sacsma2021_antigo import Xnomes, Xmin, Xmax
+import sacsma2021 as sacsma2021
+from sacsma2021 import Xnomes, Xmin, Xmax
 import dds
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go

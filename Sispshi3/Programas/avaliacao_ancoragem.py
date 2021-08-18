@@ -4,7 +4,7 @@ from plotly.subplots import make_subplots
 import plotly.graph_objects as go
 
 # Leitura
-rodada = dt.datetime(2021, 8, 2, 13, tzinfo=dt.timezone.utc)
+rodada = dt.datetime(2021, 7, 28, 13, tzinfo=dt.timezone.utc)
 ini_obs = rodada-dt.timedelta(days=10)
 ini_obs = ini_obs.isoformat()
 fim_prev = rodada+dt.timedelta(days=14)
@@ -65,6 +65,10 @@ for idx, info in bacias_def.iterrows():
         fig.write_image(f'../Simulacoes/{ano:04d}_{mes:02d}_{dia:02d}_{hora:02d}/teste_b{bacia:02d}_{ano:04d}{mes:02d}{dia:02d}{hora:02d}.png')
         fig.show()
 
+
+        print('NSE = ' + str(he.nse(Simul_Inc['Qmacs'],Simul_Inc['Qjus'])))
+        print('Log-Nash = ' + str(he.nse(np.log(Simul_Inc['Qmacs']),np.log(Simul_Inc['Qjus']))))
+        print('PBIAS = ' + str(hv.evaluator(hv.pbias,Simul_Inc['Qmacs'],Simul_Inc['Qjus'])))
+
 dados_anc = pd.read_csv(f'../Simulacoes/{ano:04d}_{mes:02d}_{dia:02d}_{hora:02d}/sim_anc_b10_{ano:04d}{mes:02d}{dia:02d}{hora:02d}.csv',
                          index_col='datahora', parse_dates=True)
-dados_anc

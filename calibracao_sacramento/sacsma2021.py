@@ -31,8 +31,7 @@ X = (
         ('PFREE', 0, 0.8),
         ('NUH', 0.5, 4),
         ('KUH', 1, 6),
-        ('NMSK', 1, 3),
-        ('KMSK', 0.5, 3),
+        ('KMSK', 1, 168),
         ('XMSK', 0.05, 0.49))
 Xnomes = [i[0] for i in X]
 Xmin = [i[1] for i in X]
@@ -84,8 +83,7 @@ def simulacao(area, dt, PME, ETP, params, Qmon=None):
     KUH   = params['KUH']   # dias / par de escala da pdf Gama
     if Qmon is not None:
         # Parametros Muskingum
-        NMSK = params['NMSK'] # inteiro
-        KMSK = params['KMSK'] # dias
+        KMSK = params['KMSK'] # horas
         XMSK = params['XMSK'] # adimensional
 
     # Calcula as ordenadas do HU
@@ -368,9 +366,10 @@ def simulacao(area, dt, PME, ETP, params, Qmon=None):
     # Propagacao - Muskingum
     ############################################################################
     if Qmon is not None:
-        C1 = (-KMSK*XMSK + 0.5*dt) / (KMSK - KMSK*XMSK + 0.5*dt)
-        C2 = (KMSK*XMSK + 0.5*dt) / (KMSK - KMSK*XMSK + 0.5*dt)
-        C3 = (KMSK - KMSK*XMSK - 0.5*dt) / (KMSK - KMSK*XMSK + 0.5*dt)
+        dth = dt*24 #transforma dt em horas
+        C1 = (dth - 2.0 *KMSK*XMSK)/(2.0*KMSK*(1.0-XMSK)+dth)
+        C2 = (dth+2.0*KMSK*XMSK)/(2.0*KMSK*(1.0-XMSK)+dth)
+        C3 = (2.0*KMSK*(1.0-XMSK)-dth)/(2.0*KMSK*(1.0-XMSK)+dth)
         Qmsk = np.empty(len(Qmon))
         Qmsk[0] = Qmon[0]
         for i in range(1, len(Qmon)):
@@ -378,15 +377,6 @@ def simulacao(area, dt, PME, ETP, params, Qmon=None):
     ############################################################################
     # Propagacao - Muskingum
     ############################################################################
-
-    # # Atualizacao dos estados
-    # estados['UZTWC'] = UZTWC
-    # estados['UZFWC'] = UZFWC
-    # estados['LZTWC'] = LZTWC
-    # estados['LZFPC'] = LZFPC
-    # estados['LZFSC'] = LZFSC
-    # estados['ADIMC'] = ADIMC
-    # estados['UH'] = StUH
     if Qmon is not None:
         Qsim = Qbfp + Qbfs + Qtco + Qmsk
     else:
