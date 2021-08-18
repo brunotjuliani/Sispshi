@@ -4,7 +4,7 @@ Modelo Sacramento Soil Moisture Accounting (SAC-SMA)
 + Muskingum para progacao de Qmon
 --------------------------------------------------------------------------------
 Implementacao - Arlan Scortegagna, fev/2021
-Ultima atualizacao - Arlan Scortegagna, abr/2021
+Ultima atualizacao - Bruno Juliani, ago/2021
 --------------------------------------------------------------------------------
 '''
 
@@ -339,11 +339,13 @@ def simulacao(area, dt, PME, ETP, params, Qmon=None):
 
     ############################################################################
     # Propagacao - Muskingum
+    # Atualizado por Bruno - agosto/2021
     ############################################################################
     if Qmon is not None:
-        C1 = (-KMSK*XMSK + 0.5*dt) / (KMSK - KMSK*XMSK + 0.5*dt)
-        C2 = (KMSK*XMSK + 0.5*dt) / (KMSK - KMSK*XMSK + 0.5*dt)
-        C3 = (KMSK - KMSK*XMSK - 0.5*dt) / (KMSK - KMSK*XMSK + 0.5*dt)
+        dth = dt*24 #transforma dt em horas
+        C1 = (dth - 2.0 *KMSK*XMSK)/(2.0*KMSK*(1.0-XMSK)+dth)
+        C2 = (dth+2.0*KMSK*XMSK)/(2.0*KMSK*(1.0-XMSK)+dth)
+        C3 = (2.0*KMSK*(1.0-XMSK)-dth)/(2.0*KMSK*(1.0-XMSK)+dth)
         Qmsk = np.empty(len(Qmon))
         Qmsk[0] = Qmon[0]
         for i in range(1, len(Qmon)):
@@ -352,14 +354,6 @@ def simulacao(area, dt, PME, ETP, params, Qmon=None):
     # Propagacao - Muskingum
     ############################################################################
 
-    # # Atualizacao dos estados
-    # estados['UZTWC'] = UZTWC
-    # estados['UZFWC'] = UZFWC
-    # estados['LZTWC'] = LZTWC
-    # estados['LZFPC'] = LZFPC
-    # estados['LZFSC'] = LZFSC
-    # estados['ADIMC'] = ADIMC
-    # estados['UH'] = StUH
     if Qmon is not None:
         Qsim = Qbfp + Qbfs + Qtco + Qmsk
     else:

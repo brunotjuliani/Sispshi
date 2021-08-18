@@ -5,10 +5,10 @@ import datetime as dt
 import plotly.graph_objects as go
 
 
-bacia_nome = 'Sao_Mateus_do_Sul'
-cod_bacia = '06'
-area_inc = '2411'
-area_tot = '6035'
+bacia_nome = 'Uniao_da_Vitoria'
+cod_bacia = '09'
+area_inc = '3029'
+area_tot = '22010'
 
 precip = pd.read_csv(f'../Dados/Chuva/Historico_Bacias/hist_precip_{cod_bacia}_{bacia_nome}.csv',
                      index_col = 0, parse_dates=True)
@@ -28,17 +28,24 @@ if vazao.index[-1] < data_final:
 dados_peq = pd.merge(precip, vazao, how = 'outer',
                  left_index = True, right_index = True)
 
-
 #Leitura das vazoes de montante. Faz o preenchimento de cada uma das vazoes
 #Depois limita vazao em zero.
 #Posteiormente, soma todas as vazoes de montante.
-dados_mont1 = pd.read_csv(f'../Dados/Vazao/02_Porto_Amazonas.csv',index_col = 0, parse_dates=True)
+dados_mont1 = pd.read_csv(f'../Dados/Vazao/05_Santa_Cruz_do_Timbo.csv',index_col = 0, parse_dates=True)
 dados_mont1['qmon'] = dados_mont1['q_m3s'].interpolate(method='spline', order=3)
 dados_mont1 = dados_mont1.clip(lower=0)
 
+dados_mont2 = pd.read_csv(f'../Dados/Vazao/08_Fluviopolis.csv',index_col = 0, parse_dates=True)
+dados_mont2['qmon'] = dados_mont2['q_m3s'].interpolate(method='spline', order=3)
+dados_mont2 = dados_mont2.clip(lower=0)
+
+# dados_mont3 = pd.read_csv(f'../Dados/Vazao/07_Divisa.csv',index_col = 0, parse_dates=True)
+# dados_mont3['qmon'] = dados_mont3['q_m3s'].interpolate(method='spline', order=3)
+# dados_mont3 = dados_mont3.clip(lower=0)
+
 #soma as diversas vazoes de montante (entre 1 e 4 valores p/ sispshi)
 dados_mont = pd.DataFrame()
-dados_mont['qmon'] = dados_mont1['qmon']
+dados_mont['qmon'] = dados_mont1['qmon'] + dados_mont2['qmon'] #+ dados_mont3['qmon']
 
 if dados_mont.index[0] > data_inicial:
     data_inicial = dados_mont.index[0]
@@ -65,9 +72,9 @@ dados_6hrs = (dados_peq.resample("6H", closed='right', label = 'right').
               agg({'pme':np.sum, 'etp':np.sum, 'qjus':np.mean, 'qmon':np.mean}))
 dados_6hrs = dados_6hrs.iloc[1:-1]
 
-with open(f'../../PEQ/peq_6h_{cod_bacia}_{bacia_nome}.csv', 'w', newline = '') as file:
+with open(f'../../PEQ/{cod_bacia}_{bacia_nome}_peq.csv', 'w', newline = '') as file:
     writer = csv.writer(file)
     writer.writerow([area_inc, area_tot])
-dados_6hrs.to_csv(f'../../PEQ/peq_6h_{cod_bacia}_{bacia_nome}.csv', mode = 'a',
+dados_6hrs.to_csv(f'../../PEQ/{cod_bacia}_{bacia_nome}_peq.csv', mode = 'a',
                   index_label='datahora', float_format='%.3f')
 print('Finalizado PEQ - ' + cod_bacia + ' - ' + bacia_nome)

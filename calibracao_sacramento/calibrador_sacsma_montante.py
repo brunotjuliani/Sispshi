@@ -70,13 +70,12 @@ def sim(X):
 
 
 ### LEITURA FORÇANTES
-bn = 6
-bnome = 'Sao_Mateus_do_Sul'
+bn = 9
+bnome = 'Uniao_da_Vitoria'
 area = pd.read_csv(f'../PEQ/{bn:02d}_{bnome}_peq.csv', nrows=1, header=None).values[0][0]
 dt = 0.25 # 6 hr
 PEQ = pd.read_csv(f'../PEQ/{bn:02d}_{bnome}_peq.csv', skiprows=1,
                   parse_dates=True, index_col='datahora')
-PEQ
 PME = PEQ['pme']
 ETP = PEQ['etp']
 Qobs = PEQ['qjus'].rename('qobs')
