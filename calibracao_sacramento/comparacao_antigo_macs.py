@@ -16,8 +16,8 @@ def sim(X):
     return Qsim
 
 ### LEITURA FORÇANTES
-bn = 15
-bnome = 'Aguas_do_Vere'
+bn = 1
+bnome = 'Rio_Negro'
 area = pd.read_csv(f'../PEQ/{bn:02d}_{bnome}_peq.csv', nrows=1, header=None).values[0][0]
 dt = 0.25 # 6 hr
 PEQ = pd.read_csv(f'../PEQ/{bn:02d}_{bnome}_peq.csv', skiprows=1,
@@ -53,11 +53,11 @@ fig.update_layout(autosize=False,width=800,height=450,margin=dict(l=30,r=30,b=10
 fig.write_html(f'./param_macs/teste_calib_{bn:02d}_{bnome}.html')
 fig.show()
 
-Simul = Simul.loc['2018':'2021']
-Qobs = Qobs.loc['2018':'2021']
-Qsim_ant = Qsim_ant.loc['2018':'2021']
-Qobs_ant = Qobs_ant.loc['2018':'2021']
-PME = PME.loc['2018':'2021']
+Simul = Simul.loc['2017':'2021']
+Qobs = Qobs.loc['2017':'2021']
+Qsim_ant = Qsim_ant.loc['2017':'2021']
+Qobs_ant = Qobs_ant.loc['2017':'2021']
+PME = PME.loc['2017':'2021']
 
 print('Nash MACS = ' + str(he.nse(Simul['MACS'],Qobs)))
 print('Log-Nash MACS = ' + str(he.nse(np.log(Simul['MACS']),np.log(Qobs))))
@@ -70,3 +70,9 @@ print('PBIAS MACS = ' + str(hv.evaluator(hv.pbias,Simul['MACS'],Qobs)))
 print('Nash Antigo = ' + str(he.nse(Qsim_ant['qsim_antigo'],Qobs_ant['qjus'])))
 print('Log-Nash Antigo = ' + str(he.nse(np.log(Qsim_ant['qsim_antigo']),np.log(Qobs_ant['qjus']))))
 print('PBIAS Antigo = ' + str(hv.evaluator(hv.pbias,Qsim_ant['qsim_antigo'],Qobs_ant['qjus'])))
+
+# Simul['Qobs'] = Qobs
+# Simul = Simul[['Qobs', 'MACS']]
+# Simul.columns = ['Qobs', 'Qsim']
+# Simul.to_csv('comparacao_b01.csv',
+#              index_label='datahora', float_format='%.3f')

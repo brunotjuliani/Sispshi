@@ -5,17 +5,17 @@ import datetime as dt
 import plotly.graph_objects as go
 
 
-bacia_nome = 'Uniao_da_Vitoria'
-cod_bacia = '09'
-area_inc = '3029'
-area_tot = '22010'
+bacia_nome = 'Rio_Negro'
+cod_bacia = '01'
+area_inc = '3461'
+area_tot = '3461'
 
 precip = pd.read_csv(f'../Dados/Chuva/Historico_Bacias/hist_precip_{cod_bacia}_{bacia_nome}.csv',
                      index_col = 0, parse_dates=True)
 precip.columns = ['pme']
 data_inicial = precip.index[0]
 data_final = precip.index[-1]
-
+precip
 
 vazao = pd.read_csv(f'../Dados/Vazao/{cod_bacia}_{bacia_nome}.csv',
                     index_col = 0, parse_dates=True)
@@ -28,33 +28,44 @@ if vazao.index[-1] < data_final:
 dados_peq = pd.merge(precip, vazao, how = 'outer',
                  left_index = True, right_index = True)
 
-#Leitura das vazoes de montante. Faz o preenchimento de cada uma das vazoes
-#Depois limita vazao em zero.
-#Posteiormente, soma todas as vazoes de montante.
-dados_mont1 = pd.read_csv(f'../Dados/Vazao/05_Santa_Cruz_do_Timbo.csv',index_col = 0, parse_dates=True)
-dados_mont1['qmon'] = dados_mont1['q_m3s'].interpolate(method='spline', order=3)
-dados_mont1 = dados_mont1.clip(lower=0)
+##############################################################################
+######################### PARA BACIAS SEM MONTANTE ###########################
+#Insere coluna vazia de montante
+dados_peq['qmon'] = np.nan
+dados_peq = dados_peq.loc[data_inicial:data_final]
+##############################################################################
 
-dados_mont2 = pd.read_csv(f'../Dados/Vazao/08_Fluviopolis.csv',index_col = 0, parse_dates=True)
-dados_mont2['qmon'] = dados_mont2['q_m3s'].interpolate(method='spline', order=3)
-dados_mont2 = dados_mont2.clip(lower=0)
+# ##############################################################################
+# ######################### PARA BACIAS COM MONTANTE ###########################
 
+# #Leitura das vazoes de montante. Faz o preenchimento de cada uma das vazoes
+# #Depois limita vazao em zero.
+# #Posteiormente, soma todas as vazoes de montante.
+# dados_mont1 = pd.read_csv(f'../Dados/Vazao/05_Santa_Cruz_do_Timbo.csv',index_col = 0, parse_dates=True)
+# dados_mont1['qmon'] = dados_mont1['q_m3s'].interpolate(method='spline', order=3)
+# dados_mont1 = dados_mont1.clip(lower=0)
+#
+# dados_mont2 = pd.read_csv(f'../Dados/Vazao/08_Fluviopolis.csv',index_col = 0, parse_dates=True)
+# dados_mont2['qmon'] = dados_mont2['q_m3s'].interpolate(method='spline', order=3)
+# dados_mont2 = dados_mont2.clip(lower=0)
+#
 # dados_mont3 = pd.read_csv(f'../Dados/Vazao/07_Divisa.csv',index_col = 0, parse_dates=True)
 # dados_mont3['qmon'] = dados_mont3['q_m3s'].interpolate(method='spline', order=3)
 # dados_mont3 = dados_mont3.clip(lower=0)
-
-#soma as diversas vazoes de montante (entre 1 e 4 valores p/ sispshi)
-dados_mont = pd.DataFrame()
-dados_mont['qmon'] = dados_mont1['qmon'] + dados_mont2['qmon'] #+ dados_mont3['qmon']
-
-if dados_mont.index[0] > data_inicial:
-    data_inicial = dados_mont.index[0]
-if dados_mont.index[-1] < data_final:
-    data_final = dados_mont.index[-1]
-
-dados_peq = pd.merge(dados_peq, dados_mont['qmon'], how = 'outer',
-                 left_index = True, right_index = True)
-dados_peq = dados_peq.loc[data_inicial:data_final]
+#
+# #soma as diversas vazoes de montante (entre 1 e 4 valores p/ sispshi)
+# dados_mont = pd.DataFrame()
+# dados_mont['qmon'] = dados_mont1['qmon'] + dados_mont2['qmon'] #+ dados_mont3['qmon']
+#
+# if dados_mont.index[0] > data_inicial:
+#     data_inicial = dados_mont.index[0]
+# if dados_mont.index[-1] < data_final:
+#     data_final = dados_mont.index[-1]
+#
+# dados_peq = pd.merge(dados_peq, dados_mont['qmon'], how = 'outer',
+#                  left_index = True, right_index = True)
+# dados_peq = dados_peq.loc[data_inicial:data_final]
+# ##############################################################################
 
 etp = pd.read_csv(f'../Dados/ETP/etpclim_{cod_bacia}.txt', header = None)
 etp['Mes'] = etp[0].str.slice(0,2)
