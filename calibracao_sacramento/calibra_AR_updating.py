@@ -38,9 +38,9 @@ def att_sim_AR(Qobs, Qsim, params):
 
     return Qsim_att
 
-X = (('a1', 0, 1000),
-     ('a2', 0, 1000),
-     ('a3', 0, 1000))
+X = (('a1', -10, 10),
+     ('a2', -10, 10),
+     ('a3', -10, 10))
 Xnomes = [i[0] for i in X]
 Xmin = [i[1] for i in X]
 Xmax = [i[2] for i in X]
@@ -54,19 +54,14 @@ def fobj_nse(X):
     fmin = 1 - NSE
     return fmin
 
-def att_sim(X):
-    params = X
-    Qatt = att_sim_AR(Qobs, Qsim, params)
-    return Qatt
-
 serie = pd.read_csv('comparacao_b01.csv', parse_dates=True, index_col=0)
 Qobs = serie['Qobs']
 Qsim = serie['Qsim']
 
-X1, F1 = dds.dds(Xmin, Xmax, fobj_nse, r=0.2, m=1000)
+X1, F1 = dds.dds(Xmin, Xmax, fobj_nse, r=0.2, m=5000)
 Qatt_1 = att_sim_AR(Qobs, Qsim, X1)
 
 fig = go.Figure()
 fig.add_trace(go.Scatter(x=Qobs.index, y=Qobs, name='Qobs', marker_color='black'))
 fig.add_trace(go.Scatter(x=Qsim.index, y=Qsim, name='Qsim_original', marker_color='blue'))
-fig.add_trace(go.Scatter(x=Qatt_1.index, y=Qatt_1, name='Qsim_atualizado', marker_color='red'))
+fig.add_trace(go.Scatter(x=Qatt_1.index, y=Qatt_1, name='Qatualizado', marker_color='red'))
