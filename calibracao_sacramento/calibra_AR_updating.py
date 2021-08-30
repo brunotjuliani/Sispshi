@@ -61,6 +61,11 @@ Qsim = serie['Qsim']
 X1, F1 = dds.dds(Xmin, Xmax, fobj_nse, r=0.2, m=5000)
 Qatt_1 = att_sim_AR(Qobs, Qsim, X1)
 
+X2 = {'a1':0.66962056, 'a2':0.34461119, 'a3':-0.03721481}
+Qatt_2 = att_sim_AR(Qobs, Qsim, X2)
+
+
+
 fig = go.Figure()
 fig.add_trace(go.Scatter(x=Qobs.index, y=Qobs, name='Qobs', marker_color='black'))
 fig.add_trace(go.Scatter(x=Qsim.index, y=Qsim, name='Qsim_original', marker_color='blue'))
