@@ -1,7 +1,13 @@
 import pandas as pd
 import numpy as np
+import ast
 #Definicao das sub-bacias
-bacias_def = pd.read_csv('../Dados/bacias_def.csv', dtype={'b_montante':list})
+bacias_def = pd.read_csv('../Dados/bacias_def.csv')
+
+data = open('../Dados/dict_montantes.txt').read()
+
+json.loads(data)
+dict_mtes[6]
 
 params1 = pd.read_csv('../../calibracao_sacramento/param_macs/param_macs_01_Rio_Negro.csv', index_col='Parametros')
 params1 = params1['Par_MACS'].rename('par_01')
@@ -23,6 +29,22 @@ params5 = pd.read_csv('../../calibracao_sacramento/param_macs/param_macs_05_Sant
 params5 = params5['Par_MACS'].rename('par_05')
 params = pd.merge(params, params5, left_index=True, right_index=True)
 
+params6 = pd.read_csv('../../calibracao_sacramento/param_macs/param_macs_06_Sao_Mateus_do_Sul.csv', index_col='Parametros')
+params6 = params6['Par_MACS'].rename('par_06')
+params = pd.merge(params, params6, left_index=True, right_index=True)
+
+params7 = pd.read_csv('../../calibracao_sacramento/param_macs/param_macs_07_Divisa.csv', index_col='Parametros')
+params7 = params7['Par_MACS'].rename('par_07')
+params = pd.merge(params, params7, left_index=True, right_index=True)
+
+params8 = pd.read_csv('../../calibracao_sacramento/param_macs/param_macs_08_Fluviopolis.csv', index_col='Parametros')
+params8 = params8['Par_MACS'].rename('par_08')
+params = pd.merge(params, params8, left_index=True, right_index=True)
+
+params9 = pd.read_csv('../../calibracao_sacramento/param_macs/param_macs_09_Uniao_da_Vitoria.csv', index_col='Parametros')
+params9 = params9['Par_MACS'].rename('par_09')
+params = pd.merge(params, params9, left_index=True, right_index=True)
+
 params10 = pd.read_csv('../../calibracao_sacramento/param_macs/param_macs_10_Madereira_Gavazzoni.csv', index_col='Parametros')
 params10 = params10['Par_MACS'].rename('par_10')
 params = pd.merge(params, params10, left_index=True, right_index=True)
@@ -43,4 +65,4 @@ params15 = pd.read_csv('../../calibracao_sacramento/param_macs/param_macs_15_Agu
 params15 = params15['Par_MACS'].rename('par_15')
 params = pd.merge(params, params15, left_index=True, right_index=True)
 
-params.to_csv('../Dados/param_dt6.csv')
+params.to_csv('../Dados/param_dt6_mte.csv')

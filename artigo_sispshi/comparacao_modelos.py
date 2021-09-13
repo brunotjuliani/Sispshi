@@ -43,8 +43,8 @@ def iph2_f(X):
     return Qsim
 
 ### LEITURA FORÇANTES
-bn = 13
-bnome = 'Solais_Novo'
+bn = 10
+bnome = 'Madereira_Gavazzoni'
 area = pd.read_csv(f'./PEQ/{bn:02d}_{bnome}_peq_diario.csv', nrows=1, header=None).values[0][0]
 # DTs diários para cada modelo
 dt_sac = 1
@@ -96,7 +96,7 @@ Simul['IPH2'] = iph2_f(params_iph2['Par_NSE'])
 
 Simul.round(3).to_csv(f'./Parametros/simul_{bn:02d}_{bnome}.csv', index_label='data')
 
-Simul = Simul.loc['2018':]
+Simul = Simul.loc['2020-07':]
 
 fig = make_subplots(rows=3, cols=1, shared_xaxes=True, specs=[[{'rowspan': 1, 'colspan': 1}],[{'rowspan': 2, 'colspan': 1}],[{'rowspan': 0, 'colspan': 0}]])
 fig.add_trace(go.Scatter(x=Simul.index, y=Simul['pme'], name="PME (mm)"), row=1, col=1)
@@ -110,92 +110,94 @@ fig.add_trace(go.Scatter(x=Simul.index, y=Simul['SMAP'], name='Smap', marker_col
 fig.add_trace(go.Scatter(x=Simul.index, y=Simul['IPH2'], name='iph-2', marker_color='orangered'), row=2, col=1)
 fig.update_yaxes(title_text='Chuva [mm]', row=1, col=1)
 fig.update_yaxes(title_text='Vazão [m3s-1]', row=2, col=1)
-fig.update_layout(legend_title_text='Comparação Modelo Sacramento')
-fig.update_layout(autosize=False,width=1500,height=750,margin=dict(l=30,r=30,b=10,t=10))
-fig.write_html(f'./Parametros/teste_calib_{bn:02d}_{bnome}.html')
+fig.update_layout(legend_title_text=f'Comparação Madereira Gavazzoni')
+fig.update_layout(autosize=False,width=1200,height=675,margin=dict(l=30,r=30,b=10,t=10))
+fig.write_image(f'./Parametros/imagem_{bn:02d}_{bnome}.png')
+# fig.update_layout(autosize=False,width=1500,height=750,margin=dict(l=30,r=30,b=10,t=10))
+# fig.write_html(f'./Parametros/teste_calib_{bn:02d}_{bnome}.html')
 fig.show()
 
-metricas_2020 = pd.DataFrame(index=['MGB', 'SAC', 'GR4J', 'HYMOD', 'SMAP', 'IPH2'])
-metricas_2020.index.names = ['2018:2020']
-
-mgb_nse = he.nse(Simul['MGB'], Simul['Q_obs'])
-sac_nse = he.nse(Simul['SAC'], Simul['Q_obs'])
-gr4_nse = he.nse(Simul['GR4'], Simul['Q_obs'])
-hym_nse = he.nse(Simul['HYMOD'], Simul['Q_obs'])
-smap_nse = he.nse(Simul['SMAP'], Simul['Q_obs'])
-iph2_nse = he.nse(Simul['IPH2'], Simul['Q_obs'])
-metricas_2020['NSE'] = [mgb_nse, sac_nse, gr4_nse, hym_nse, smap_nse, iph2_nse]
-
-mgb_lognse = he.nse(np.log(Simul['MGB']), np.log(Simul['Q_obs']))
-sac_lognse = he.nse(np.log(Simul['SAC']), np.log(Simul['Q_obs']))
-gr4_lognse = he.nse(np.log(Simul['GR4']), np.log(Simul['Q_obs']))
-hym_lognse = he.nse(np.log(Simul['HYMOD']), np.log(Simul['Q_obs']))
-smap_lognse = he.nse(np.log(Simul['SMAP']), np.log(Simul['Q_obs']))
-iph2_lognse = he.nse(np.log(Simul['IPH2']), np.log(Simul['Q_obs']))
-metricas_2020['Log-NSE'] = [mgb_lognse, sac_lognse, gr4_lognse,
-                            hym_lognse, smap_lognse, iph2_lognse]
-
-mgb_kge = he.kge_2012(Simul['MGB'], Simul['Q_obs'])
-sac_kge = he.kge_2012(Simul['SAC'], Simul['Q_obs'])
-gr4_kge = he.kge_2012(Simul['GR4'], Simul['Q_obs'])
-hym_kge = he.kge_2012(Simul['HYMOD'], Simul['Q_obs'])
-smap_kge = he.kge_2012(Simul['SMAP'], Simul['Q_obs'])
-iph2_kge = he.kge_2012(Simul['IPH2'], Simul['Q_obs'])
-metricas_2020['KGE'] = [mgb_kge, sac_kge, gr4_kge, hym_kge, smap_kge, iph2_kge]
-
-mgb_pbias = hv.evaluator(hv.pbias,Simul['MGB'],Simul['Q_obs'])[0]
-sac_pbias = hv.evaluator(hv.pbias,Simul['SAC'],Simul['Q_obs'])[0]
-gr4_pbias = hv.evaluator(hv.pbias,Simul['GR4'],Simul['Q_obs'])[0]
-hym_pbias = hv.evaluator(hv.pbias,Simul['HYMOD'],Simul['Q_obs'])[0]
-smap_pbias = hv.evaluator(hv.pbias,Simul['SMAP'],Simul['Q_obs'])[0]
-iph2_pbias = hv.evaluator(hv.pbias,Simul['IPH2'],Simul['Q_obs'])[0]
-metricas_2020['PBIAS(%)'] = [mgb_pbias, sac_pbias, gr4_pbias,
-                          hym_pbias, smap_pbias, iph2_pbias]
-
-metricas_2020 = metricas_2020.round(3)
-
-
-Simul = Simul.loc['2018':'2019']
-metricas_2019 = pd.DataFrame(index=['MGB', 'SAC', 'GR4J', 'HYMOD', 'SMAP', 'IPH2'])
-metricas_2019.index.names = ['2018:2019']
-
-mgb_nse = he.nse(Simul['MGB'], Simul['Q_obs'])
-sac_nse = he.nse(Simul['SAC'], Simul['Q_obs'])
-gr4_nse = he.nse(Simul['GR4'], Simul['Q_obs'])
-hym_nse = he.nse(Simul['HYMOD'], Simul['Q_obs'])
-smap_nse = he.nse(Simul['SMAP'], Simul['Q_obs'])
-iph2_nse = he.nse(Simul['IPH2'], Simul['Q_obs'])
-metricas_2019['NSE'] = [mgb_nse, sac_nse, gr4_nse, hym_nse, smap_nse, iph2_nse]
-
-mgb_lognse = he.nse(np.log(Simul['MGB']), np.log(Simul['Q_obs']))
-sac_lognse = he.nse(np.log(Simul['SAC']), np.log(Simul['Q_obs']))
-gr4_lognse = he.nse(np.log(Simul['GR4']), np.log(Simul['Q_obs']))
-hym_lognse = he.nse(np.log(Simul['HYMOD']), np.log(Simul['Q_obs']))
-smap_lognse = he.nse(np.log(Simul['SMAP']), np.log(Simul['Q_obs']))
-iph2_lognse = he.nse(np.log(Simul['IPH2']), np.log(Simul['Q_obs']))
-metricas_2019['Log-NSE'] = [mgb_lognse, sac_lognse, gr4_lognse,
-                            hym_lognse, smap_lognse, iph2_lognse]
-
-mgb_kge = he.kge_2012(Simul['MGB'], Simul['Q_obs'])
-sac_kge = he.kge_2012(Simul['SAC'], Simul['Q_obs'])
-gr4_kge = he.kge_2012(Simul['GR4'], Simul['Q_obs'])
-hym_kge = he.kge_2012(Simul['HYMOD'], Simul['Q_obs'])
-smap_kge = he.kge_2012(Simul['SMAP'], Simul['Q_obs'])
-iph2_kge = he.kge_2012(Simul['IPH2'], Simul['Q_obs'])
-metricas_2019['KGE'] = [mgb_kge, sac_kge, gr4_kge, hym_kge, smap_kge, iph2_kge]
-
-mgb_pbias = hv.evaluator(hv.pbias,Simul['MGB'],Simul['Q_obs'])[0]
-sac_pbias = hv.evaluator(hv.pbias,Simul['SAC'],Simul['Q_obs'])[0]
-gr4_pbias = hv.evaluator(hv.pbias,Simul['GR4'],Simul['Q_obs'])[0]
-hym_pbias = hv.evaluator(hv.pbias,Simul['HYMOD'],Simul['Q_obs'])[0]
-smap_pbias = hv.evaluator(hv.pbias,Simul['SMAP'],Simul['Q_obs'])[0]
-iph2_pbias = hv.evaluator(hv.pbias,Simul['IPH2'],Simul['Q_obs'])[0]
-metricas_2019['PBIAS(%)'] = [mgb_pbias, sac_pbias, gr4_pbias,
-                          hym_pbias, smap_pbias, iph2_pbias]
-
-metricas_2019 = metricas_2019.round(3)
-metricas_2019.to_csv(f'./Parametros/metricas_{bn:02d}_{bnome}.csv')
-
-
-print(metricas_2019)
-print(metricas_2020)
+# metricas_2020 = pd.DataFrame(index=['MGB', 'SAC', 'GR4J', 'HYMOD', 'SMAP', 'IPH2'])
+# metricas_2020.index.names = ['2018:2020']
+#
+# mgb_nse = he.nse(Simul['MGB'], Simul['Q_obs'])
+# sac_nse = he.nse(Simul['SAC'], Simul['Q_obs'])
+# gr4_nse = he.nse(Simul['GR4'], Simul['Q_obs'])
+# hym_nse = he.nse(Simul['HYMOD'], Simul['Q_obs'])
+# smap_nse = he.nse(Simul['SMAP'], Simul['Q_obs'])
+# iph2_nse = he.nse(Simul['IPH2'], Simul['Q_obs'])
+# metricas_2020['NSE'] = [mgb_nse, sac_nse, gr4_nse, hym_nse, smap_nse, iph2_nse]
+#
+# mgb_lognse = he.nse(np.log(Simul['MGB']), np.log(Simul['Q_obs']))
+# sac_lognse = he.nse(np.log(Simul['SAC']), np.log(Simul['Q_obs']))
+# gr4_lognse = he.nse(np.log(Simul['GR4']), np.log(Simul['Q_obs']))
+# hym_lognse = he.nse(np.log(Simul['HYMOD']), np.log(Simul['Q_obs']))
+# smap_lognse = he.nse(np.log(Simul['SMAP']), np.log(Simul['Q_obs']))
+# iph2_lognse = he.nse(np.log(Simul['IPH2']), np.log(Simul['Q_obs']))
+# metricas_2020['Log-NSE'] = [mgb_lognse, sac_lognse, gr4_lognse,
+#                             hym_lognse, smap_lognse, iph2_lognse]
+#
+# mgb_kge = he.kge_2012(Simul['MGB'], Simul['Q_obs'])
+# sac_kge = he.kge_2012(Simul['SAC'], Simul['Q_obs'])
+# gr4_kge = he.kge_2012(Simul['GR4'], Simul['Q_obs'])
+# hym_kge = he.kge_2012(Simul['HYMOD'], Simul['Q_obs'])
+# smap_kge = he.kge_2012(Simul['SMAP'], Simul['Q_obs'])
+# iph2_kge = he.kge_2012(Simul['IPH2'], Simul['Q_obs'])
+# metricas_2020['KGE'] = [mgb_kge, sac_kge, gr4_kge, hym_kge, smap_kge, iph2_kge]
+#
+# mgb_pbias = hv.evaluator(hv.pbias,Simul['MGB'],Simul['Q_obs'])[0]
+# sac_pbias = hv.evaluator(hv.pbias,Simul['SAC'],Simul['Q_obs'])[0]
+# gr4_pbias = hv.evaluator(hv.pbias,Simul['GR4'],Simul['Q_obs'])[0]
+# hym_pbias = hv.evaluator(hv.pbias,Simul['HYMOD'],Simul['Q_obs'])[0]
+# smap_pbias = hv.evaluator(hv.pbias,Simul['SMAP'],Simul['Q_obs'])[0]
+# iph2_pbias = hv.evaluator(hv.pbias,Simul['IPH2'],Simul['Q_obs'])[0]
+# metricas_2020['PBIAS(%)'] = [mgb_pbias, sac_pbias, gr4_pbias,
+#                           hym_pbias, smap_pbias, iph2_pbias]
+#
+# metricas_2020 = metricas_2020.round(3)
+#
+#
+# Simul = Simul.loc['2018':'2019']
+# metricas_2019 = pd.DataFrame(index=['MGB', 'SAC', 'GR4J', 'HYMOD', 'SMAP', 'IPH2'])
+# metricas_2019.index.names = ['2018:2019']
+#
+# mgb_nse = he.nse(Simul['MGB'], Simul['Q_obs'])
+# sac_nse = he.nse(Simul['SAC'], Simul['Q_obs'])
+# gr4_nse = he.nse(Simul['GR4'], Simul['Q_obs'])
+# hym_nse = he.nse(Simul['HYMOD'], Simul['Q_obs'])
+# smap_nse = he.nse(Simul['SMAP'], Simul['Q_obs'])
+# iph2_nse = he.nse(Simul['IPH2'], Simul['Q_obs'])
+# metricas_2019['NSE'] = [mgb_nse, sac_nse, gr4_nse, hym_nse, smap_nse, iph2_nse]
+#
+# mgb_lognse = he.nse(np.log(Simul['MGB']), np.log(Simul['Q_obs']))
+# sac_lognse = he.nse(np.log(Simul['SAC']), np.log(Simul['Q_obs']))
+# gr4_lognse = he.nse(np.log(Simul['GR4']), np.log(Simul['Q_obs']))
+# hym_lognse = he.nse(np.log(Simul['HYMOD']), np.log(Simul['Q_obs']))
+# smap_lognse = he.nse(np.log(Simul['SMAP']), np.log(Simul['Q_obs']))
+# iph2_lognse = he.nse(np.log(Simul['IPH2']), np.log(Simul['Q_obs']))
+# metricas_2019['Log-NSE'] = [mgb_lognse, sac_lognse, gr4_lognse,
+#                             hym_lognse, smap_lognse, iph2_lognse]
+#
+# mgb_kge = he.kge_2012(Simul['MGB'], Simul['Q_obs'])
+# sac_kge = he.kge_2012(Simul['SAC'], Simul['Q_obs'])
+# gr4_kge = he.kge_2012(Simul['GR4'], Simul['Q_obs'])
+# hym_kge = he.kge_2012(Simul['HYMOD'], Simul['Q_obs'])
+# smap_kge = he.kge_2012(Simul['SMAP'], Simul['Q_obs'])
+# iph2_kge = he.kge_2012(Simul['IPH2'], Simul['Q_obs'])
+# metricas_2019['KGE'] = [mgb_kge, sac_kge, gr4_kge, hym_kge, smap_kge, iph2_kge]
+#
+# mgb_pbias = hv.evaluator(hv.pbias,Simul['MGB'],Simul['Q_obs'])[0]
+# sac_pbias = hv.evaluator(hv.pbias,Simul['SAC'],Simul['Q_obs'])[0]
+# gr4_pbias = hv.evaluator(hv.pbias,Simul['GR4'],Simul['Q_obs'])[0]
+# hym_pbias = hv.evaluator(hv.pbias,Simul['HYMOD'],Simul['Q_obs'])[0]
+# smap_pbias = hv.evaluator(hv.pbias,Simul['SMAP'],Simul['Q_obs'])[0]
+# iph2_pbias = hv.evaluator(hv.pbias,Simul['IPH2'],Simul['Q_obs'])[0]
+# metricas_2019['PBIAS(%)'] = [mgb_pbias, sac_pbias, gr4_pbias,
+#                           hym_pbias, smap_pbias, iph2_pbias]
+#
+# metricas_2019 = metricas_2019.round(3)
+# metricas_2019.to_csv(f'./Parametros/metricas_{bn:02d}_{bnome}.csv')
+#
+#
+# print(metricas_2019)
+# print(metricas_2020)

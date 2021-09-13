@@ -247,6 +247,7 @@ for idx, info in bacias_def.iterrows():
         ETP = aq_bacias[bacia]['etp']
         Qobs = aq_bacias[bacia]['q_m3s'].rename('qobs')
         q_atual_obs = Qobs.loc[Qobs.last_valid_index()]
+        Qjus = Qobs.loc[:Qobs.last_valid_index()].interpolate(method='spline', order=3)
         #Caso nao tenha dado observado mais recente, compara com ultima hora de dado
         idx_obs_atual = Qobs.last_valid_index()
         dados_precip = aq_bacias[bacia].drop(['etp', 'q_m3s'], axis=1)
@@ -300,8 +301,16 @@ for idx, info in bacias_def.iterrows():
             Qsims[f'sac_{ens_n}'] = sacsma2021.simulacao(area_inc, dt, PME, ETP, params)
             ens_n += 1
         Qsims.index = dados_precip.index
+        #Agrupa os dados de jusante c/ parte simulada
         #Armazena no dicionario para aproveitamento de montante
-        ancorado[bacia] = Qsims
+        df_ancorado = Qsims.copy()
+        ens_n = 0
+        while ens_n <= 50:
+            serie_jusante = pd.concat([Qjus.rename(f'sac_{ens_n}'), Qsims[f'sac_{ens_n}'].loc[Qjus.last_valid_index():]])
+            serie_jusante = serie_jusante[~serie_jusante.index.duplicated(keep='first')]
+            df_ancorado[f'qjus_{ens_n}'] = serie_jusante
+            ens_n += 1
+        ancorado[bacia] = df_ancorado
         #Ancora com proporcionalidade
         print(f'Proporcionalizando vazao simulada')
         q_atual_sim = Qsims.loc[idx_obs_atual,'sac_0']
