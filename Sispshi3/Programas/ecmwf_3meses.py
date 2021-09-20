@@ -21,6 +21,4 @@ membros = grbs.index.unique('number')
 #Lista passos de tempo
 steps = grbs.index.unique('step')
 
-
-xx = grbs['x'].unique()
-xx
+grbs
